@@ -74,7 +74,7 @@ const LoginPage = () => {
               LOGIN
             </Button>
             <p className="mb-0 mt-4 text-center">
-              Don't have an account?{" "}
+              Don`&apos;`t have an account?{" "}
               <Link className="text-decoration-none" to="/register">
                 <span className="text-primary fw-bold hoverable">Register</span>
               </Link>
