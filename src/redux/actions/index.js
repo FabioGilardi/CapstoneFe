@@ -31,3 +31,33 @@
 //     }
 //   };
 // };
+
+const baseUrl = "http://loaclhost:3001/auth";
+
+export const SAVE_ACCESS_TOKEN = "SAVE_ACCESS_TOKEN";
+
+export const actionlogin = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseUrl + "/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const accessToken = data.accessToken;
+        dispatch({
+          type: SAVE_ACCESS_TOKEN,
+          payload: accessToken,
+        });
+      } else {
+        alert("Error fetching results");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

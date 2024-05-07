@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CustomNavbar from "./components/CustomNavbar";
 import CustomFooter from "./components/CustomFooter";
+import LoginPage from "./components/LoginPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
                 </h1>
               }
             />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </main>
         <CustomFooter />
