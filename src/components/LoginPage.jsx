@@ -3,10 +3,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { actionlogin } from "../redux/actions";
+import { REGISTER_IS_OK, actionlogin } from "../redux/actions";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -24,6 +24,13 @@ const LoginPage = () => {
   };
 
   const [form, setForm] = useState(initialForm);
+
+  useEffect(() => {
+    dispatch({
+      type: REGISTER_IS_OK,
+      payload: false,
+    });
+  }, []);
 
   return (
     <Container className="h-100">
@@ -74,7 +81,7 @@ const LoginPage = () => {
               LOGIN
             </Button>
             <p className="mb-0 mt-4 text-center">
-              Don`&apos;`t have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link className="text-decoration-none" to="/register">
                 <span className="text-primary fw-bold hoverable">Register</span>
               </Link>

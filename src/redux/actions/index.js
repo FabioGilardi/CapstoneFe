@@ -32,14 +32,16 @@
 //   };
 // };
 
-const baseUrl = "http://loaclhost:3001/auth";
+const baseUrlAuth = "http://loaclhost:3001/auth";
 
 export const SAVE_ACCESS_TOKEN = "SAVE_ACCESS_TOKEN";
+export const REGISTER_IS_OK = "REGISTER_IS_OK";
+export const REGISTER_HAS_ERRORS = "REGISTER_HAS_ERRORS";
 
 export const actionlogin = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(baseUrl + "/login", {
+      const response = await fetch(baseUrlAuth + "/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,6 +57,42 @@ export const actionlogin = (payload) => {
         });
       } else {
         alert("Error fetching results");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const actionRegister = (payload) => {
+  return async (dispatch) => {
+    dispatch({
+      type: REGISTER_IS_OK,
+      payload: false,
+    });
+    try {
+      const response = await fetch(baseUrlAuth + "/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        dispatch({
+          type: REGISTER_HAS_ERRORS,
+          payload: null,
+        });
+        dispatch({
+          type: REGISTER_IS_OK,
+          payload: true,
+        });
+      } else {
+        const data = await response.json();
+        dispatch({
+          type: REGISTER_HAS_ERRORS,
+          payload: data.message,
+        });
       }
     } catch (error) {
       console.log(error);
