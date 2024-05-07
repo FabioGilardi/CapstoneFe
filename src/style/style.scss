@@ -1,0 +1,39 @@
+// COLORS
+
+$primary: #ff6600;
+$secondary: #d1d5d4;
+$tertiray: #b3b3b2;
+
+// CSS
+
+// PER IL FOOTER A BORDO PAGINA
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.linkedin {
+  color: #0a66c2;
+}
+
+.github {
+  color: whitesmoke;
+}
+
+.footer {
+  background-color: #2b3035;
+}
+
+.hover:hover {
+  cursor: pointer;
+  color: #ff6600;
+}
+
+// Import BS
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
