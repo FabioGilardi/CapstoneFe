@@ -1,9 +1,13 @@
 import Col from "react-bootstrap/Col";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { SAVE_ACCESS_TOKEN } from "../redux/actions";
 
 // eslint-disable-next-line react/prop-types
 const SideBarProfilePage = ({ imgSrc, username }) => {
   const location = useLocation().pathname;
+
+  const dispatch = useDispatch();
 
   return (
     <Col xs={9} md={3} className="px-0 mt-3 mb-5 my-md-0">
@@ -42,7 +46,16 @@ const SideBarProfilePage = ({ imgSrc, username }) => {
           </Link>
         </p>
         <p className="text-center pt-2 mb-0">
-          <Link className="text-decoration-none text-black fw-bold">
+          <Link
+            className="text-decoration-none text-black fw-bold"
+            to="/login"
+            onClick={() => {
+              dispatch({
+                type: SAVE_ACCESS_TOKEN,
+                payload: "",
+              });
+            }}
+          >
             Logout
           </Link>
         </p>
