@@ -3,9 +3,12 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/images/logo.png";
+import { useSelector } from "react-redux";
 
 const CustomNavbar = () => {
   const location = useLocation().pathname;
+
+  const accessToken = useSelector((state) => state.authReducer.accessToken);
 
   return (
     <Navbar
@@ -56,13 +59,16 @@ const CustomNavbar = () => {
           <Nav>
             <Link
               className={
-                location === "/login" || location === "/register"
+                location === "/login" ||
+                location === "/register" ||
+                location === "/profile"
                   ? "nav-link active"
                   : "nav-link"
               }
-              to="/login"
+              to={accessToken !== "" ? "/profile" : "/login"}
             >
-              <i className="bi bi-person-circle"></i> Login
+              <i className="bi bi-person-circle"></i>
+              {accessToken !== "" ? " My Profile" : " Login"}
             </Link>
           </Nav>
         </Navbar.Collapse>

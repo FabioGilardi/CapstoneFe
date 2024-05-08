@@ -4,13 +4,14 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { actionlogin } from "../redux/actions";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const initialForm = {
     email: "",
@@ -25,15 +26,17 @@ const LoginPage = () => {
   };
 
   const loginErrors = useSelector((state) => state.authReducer.loginErrors);
+  const accessToken = useSelector((state) => state.authReducer.accessToken);
 
   const [form, setForm] = useState(initialForm);
 
   return (
     <Container className="h-100">
+      {accessToken !== "" && navigate("/profile")}
       <Row className="justify-content-center align-items-center h-100">
         <Col
-          sm={8}
-          md={6}
+          xs={10}
+          md={8}
           lg={4}
           className="border border-secondary rounded-4 shadow p-4"
         >

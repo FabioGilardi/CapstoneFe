@@ -32,17 +32,21 @@
 //   };
 // };
 
-const baseUrlAuth = "http://loaclhost:3001/auth";
+const baseUrlAuth = "http://loaclhost:3001";
 
 export const SAVE_ACCESS_TOKEN = "SAVE_ACCESS_TOKEN";
 export const REGISTER_IS_OK = "REGISTER_IS_OK";
 export const REGISTER_HAS_ERRORS = "REGISTER_HAS_ERRORS";
 export const LOGIN_HAS_ERRORS = "LOGIN_HAS_ERRORS";
+export const SAVE_CURRENT_USER = "SAVE_CURRENT_USER";
+export const CURRENT_USER_IS_LOADING = "CURRENT_USER_IS_LOADING";
+
+// AUTH REDUCER ACTIONS
 
 export const actionlogin = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(baseUrlAuth + "/login", {
+      const response = await fetch(baseUrlAuth + "/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +84,7 @@ export const actionRegister = (payload) => {
       payload: false,
     });
     try {
-      const response = await fetch(baseUrlAuth + "/register", {
+      const response = await fetch(baseUrlAuth + "/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,6 +109,39 @@ export const actionRegister = (payload) => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+// USER REDUCER ACTIONS
+
+export const getUserMe = (accessToken) => {
+  return async (dispatch) => {
+    dispatch({
+      type: CURRENT_USER_IS_LOADING,
+      payload: true,
+    });
+    try {
+      const response = await fetch(baseUrlAuth + "/users/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: SAVE_CURRENT_USER,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch({
+        type: CURRENT_USER_IS_LOADING,
+        payload: false,
+      });
     }
   };
 };

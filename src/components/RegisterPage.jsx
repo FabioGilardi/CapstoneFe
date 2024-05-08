@@ -48,8 +48,8 @@ const RegisterPage = () => {
     <Container className="my-4">
       <Row className="justify-content-center align-items-center h-100">
         <Col
-          sm={8}
-          md={6}
+          xs={10}
+          md={8}
           lg={4}
           className="border border-secondary rounded-4 shadow p-4"
         >

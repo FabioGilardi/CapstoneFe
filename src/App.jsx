@@ -3,6 +3,7 @@ import CustomNavbar from "./components/CustomNavbar";
 import CustomFooter from "./components/CustomFooter";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </main>
         <CustomFooter />
