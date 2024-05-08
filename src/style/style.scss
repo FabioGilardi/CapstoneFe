@@ -5,8 +5,15 @@ $secondary: #d1d5d4;
 $tertiray: #b3b3b2;
 
 // CSS
+@font-face {
+  font-family: "Montserrat";
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+}
 
-// PER IL FOOTER A BORDO PAGINA
+body {
+  font-family: "Montserrat", sans-serif !important;
+}
+
 html,
 body,
 #root {
@@ -33,6 +40,10 @@ body,
 .hoverable:hover {
   cursor: pointer;
   color: #ff6600;
+}
+
+.small {
+  font-size: 0.8rem !important;
 }
 
 // Import BS

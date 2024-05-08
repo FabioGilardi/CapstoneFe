@@ -124,6 +124,9 @@ const RegisterPage = () => {
                       handleChange(e, "password");
                     }}
                   />
+                  <Form.Label className="text-black ms-3 mb-0 small opacity-75">
+                    At least 8 characters
+                  </Form.Label>
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Control
@@ -150,6 +153,9 @@ const RegisterPage = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
+                  <Form.Label className="text-black ms-3 opacity-75">
+                    BIRTH DATE
+                  </Form.Label>
                   <Form.Control
                     className="border rounded-pill"
                     type="date"

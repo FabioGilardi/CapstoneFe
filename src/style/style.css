@@ -1,4 +1,12 @@
 @charset "UTF-8";
+@font-face {
+  font-family: "Montserrat";
+  src: url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+}
+body {
+  font-family: "Montserrat", sans-serif !important;
+}
+
 html,
 body,
 #root {
@@ -25,6 +33,10 @@ body,
 .hoverable:hover {
   cursor: pointer;
   color: #ff6600;
+}
+
+.small {
+  font-size: 0.8rem !important;
 }
 
 /*!
