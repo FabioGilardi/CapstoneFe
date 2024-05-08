@@ -1,4 +1,5 @@
 import {
+  LOGIN_HAS_ERRORS,
   REGISTER_HAS_ERRORS,
   REGISTER_IS_OK,
   SAVE_ACCESS_TOKEN,
@@ -6,6 +7,7 @@ import {
 
 const initialState = {
   accessToken: "",
+  loginErrors: null,
   registerIsOk: false,
   registerErrors: null,
 };
@@ -28,6 +30,12 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         registerErrors: action.payload,
+      };
+
+    case LOGIN_HAS_ERRORS:
+      return {
+        ...state,
+        loginErrors: action.payload,
       };
 
     default:

@@ -3,10 +3,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useEffect, useState } from "react";
+import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { REGISTER_IS_OK, actionlogin } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { actionlogin } from "../redux/actions";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -23,14 +24,9 @@ const LoginPage = () => {
     });
   };
 
-  const [form, setForm] = useState(initialForm);
+  const loginErrors = useSelector((state) => state.authReducer.loginErrors);
 
-  useEffect(() => {
-    dispatch({
-      type: REGISTER_IS_OK,
-      payload: false,
-    });
-  }, []);
+  const [form, setForm] = useState(initialForm);
 
   return (
     <Container className="h-100">
@@ -41,6 +37,11 @@ const LoginPage = () => {
           lg={4}
           className="border border-secondary rounded-4 shadow p-4"
         >
+          {loginErrors !== null && (
+            <Alert variant="danger">
+              <i className="bi bi-exclamation-triangle"></i> {loginErrors}
+            </Alert>
+          )}
           <h5 className="fw-bold mb-4">Login to D&G Motors</h5>
           <Form
             onSubmit={(e) => {

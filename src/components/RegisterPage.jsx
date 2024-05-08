@@ -4,9 +4,9 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actionRegister } from "../redux/actions";
+import { REGISTER_IS_OK, actionRegister } from "../redux/actions";
 import { Link } from "react-router-dom";
 
 const RegisterPage = () => {
@@ -33,6 +33,14 @@ const RegisterPage = () => {
       [attribute]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    dispatch({
+      type: REGISTER_IS_OK,
+      payload: false,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [form, setForm] = useState(initialForm);
 

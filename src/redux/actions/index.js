@@ -37,6 +37,7 @@ const baseUrlAuth = "http://loaclhost:3001/auth";
 export const SAVE_ACCESS_TOKEN = "SAVE_ACCESS_TOKEN";
 export const REGISTER_IS_OK = "REGISTER_IS_OK";
 export const REGISTER_HAS_ERRORS = "REGISTER_HAS_ERRORS";
+export const LOGIN_HAS_ERRORS = "LOGIN_HAS_ERRORS";
 
 export const actionlogin = (payload) => {
   return async (dispatch) => {
@@ -55,8 +56,16 @@ export const actionlogin = (payload) => {
           type: SAVE_ACCESS_TOKEN,
           payload: accessToken,
         });
+        dispatch({
+          type: LOGIN_HAS_ERRORS,
+          payload: null,
+        });
       } else {
-        alert("Error fetching results");
+        const data = await response.json();
+        dispatch({
+          type: LOGIN_HAS_ERRORS,
+          payload: data.message,
+        });
       }
     } catch (error) {
       console.log(error);
