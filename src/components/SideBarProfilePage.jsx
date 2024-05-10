@@ -11,7 +11,7 @@ const SideBarProfilePage = ({ imgSrc, username }) => {
 
   return (
     <Col xs={9} md={3} className="px-0 mt-3 mb-5 my-md-0">
-      <div className="border rounded-4 pt-3 pb-2 text-center px-2">
+      <div className="border rounded-4 pt-3 pb-2 text-center px-2 sticky-top">
         <div className="border-bottom border-secondary pb-3">
           <img
             src={imgSrc}

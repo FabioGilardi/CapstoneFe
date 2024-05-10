@@ -11,9 +11,11 @@ import {
   USER_PUT_HAS_ERRORS,
   USER_PUT_IS_OK,
   getUserMe,
+  saveReservations,
 } from "../redux/actions";
 import LoadingSpinner from "./LoadingSpinner";
 import { useNavigate } from "react-router-dom";
+import ReservationCard from "./ReservationCard";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -22,6 +24,9 @@ const ProfilePage = () => {
   const currentUser = useSelector((state) => state.userReducer.currentUser);
   const isLoadingCurrentUser = useSelector(
     (state) => state.userReducer.isLoadingCurrentUser
+  );
+  const reservationList = useSelector(
+    (state) => state.reservationReducer.reservations
   );
 
   const dispatch = useDispatch();
@@ -44,6 +49,7 @@ const ProfilePage = () => {
       type: PASSWORD_HAS_ERRORS,
       payload: null,
     });
+    dispatch(saveReservations(accessToken));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -83,7 +89,7 @@ const ProfilePage = () => {
                     {currentUser.birthDate}
                   </li>
                 </ul>
-                <div className="text-center">
+                <div className="text-center border-bottom border-tertiary border-2 pb-5 mt-2">
                   <Button
                     variant="primary"
                     className="text-white rounded-pill w-50 fw-bold"
@@ -94,6 +100,32 @@ const ProfilePage = () => {
                     UPDATE
                   </Button>
                 </div>
+                <h4 className="fw-bold mt-5">MY BOOKINGS</h4>
+                <p>Here you can find all bookings with sellers.</p>
+                <p>
+                  Feel free to change the day and time of a reservation or
+                  cancel it, after all we know that unexpected events are always
+                  around the corner.
+                </p>
+                <p>
+                  If you need to contact one of our sellers directly, don&apos;t
+                  hesitate, we are always at your disposal.
+                </p>
+                {reservationList.length === 0 && (
+                  <p className="fst-italic text-center text-primary">
+                    There are no reservations yet
+                  </p>
+                )}
+                <Row xs={2}>
+                  {reservationList.map((reservation) => {
+                    return (
+                      <ReservationCard
+                        key={reservation.id}
+                        reservation={reservation}
+                      />
+                    );
+                  })}
+                </Row>
               </Col>
             </Row>
           </Col>
