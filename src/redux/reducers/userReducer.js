@@ -1,5 +1,7 @@
 import {
   CURRENT_USER_IS_LOADING,
+  PASSWORD_HAS_ERRORS,
+  PASSWORD_IS_OK,
   SAVE_CURRENT_USER,
   USER_PUT_HAS_ERRORS,
   USER_PUT_IS_OK,
@@ -10,6 +12,8 @@ const initialState = {
   isLoadingCurrentUser: false,
   userPutHasErrors: null,
   userPutIsOk: false,
+  passwordHasErrors: null,
+  passwordIsOK: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -36,6 +40,18 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userPutHasErrors: action.payload,
+      };
+
+    case PASSWORD_HAS_ERRORS:
+      return {
+        ...state,
+        passwordHasErrors: action.payload,
+      };
+
+    case PASSWORD_IS_OK:
+      return {
+        ...state,
+        passwordIsOK: action.payload,
       };
 
     default:

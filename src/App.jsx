@@ -5,6 +5,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import ProfilePage from "./components/ProfilePage";
 import UpdateProfile from "./components/UpdateProfile";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/profileUpdate" element={<UpdateProfile />} />
+            <Route path="/changePassword" element={<ChangePassword />} />
           </Routes>
         </main>
         <CustomFooter />

@@ -5,7 +5,13 @@ import Button from "react-bootstrap/Button";
 import SideBarProfilePage from "./SideBarProfilePage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { USER_PUT_IS_OK, getUserMe } from "../redux/actions";
+import {
+  PASSWORD_HAS_ERRORS,
+  PASSWORD_IS_OK,
+  USER_PUT_HAS_ERRORS,
+  USER_PUT_IS_OK,
+  getUserMe,
+} from "../redux/actions";
 import LoadingSpinner from "./LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 
@@ -25,6 +31,18 @@ const ProfilePage = () => {
     dispatch({
       type: USER_PUT_IS_OK,
       payload: false,
+    });
+    dispatch({
+      type: USER_PUT_HAS_ERRORS,
+      payload: null,
+    });
+    dispatch({
+      type: PASSWORD_IS_OK,
+      payload: null,
+    });
+    dispatch({
+      type: PASSWORD_HAS_ERRORS,
+      payload: null,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

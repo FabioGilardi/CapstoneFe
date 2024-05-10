@@ -42,6 +42,8 @@ export const SAVE_CURRENT_USER = "SAVE_CURRENT_USER";
 export const CURRENT_USER_IS_LOADING = "CURRENT_USER_IS_LOADING";
 export const USER_PUT_HAS_ERRORS = "USER_PUT_HAS_ERRORS";
 export const USER_PUT_IS_OK = "USER_PUT_IS_OK";
+export const PASSWORD_HAS_ERRORS = "PASSWORD_HAS_ERRORS";
+export const PASSWORD_IS_OK = "PASSWORD_IS_OK";
 
 // AUTH REDUCER ACTIONS
 
@@ -172,6 +174,40 @@ export const putUserMe = (accessToken, payload) => {
         const data = await response.json();
         dispatch({
           type: USER_PUT_HAS_ERRORS,
+          payload: data.message,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const updatePassword = (accessToken, payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseUrlAuth + "/users/me/password", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: PASSWORD_IS_OK,
+          payload: data.message,
+        });
+        dispatch({
+          type: PASSWORD_HAS_ERRORS,
+          payload: null,
+        });
+      } else {
+        const data = await response.json();
+        dispatch({
+          type: PASSWORD_HAS_ERRORS,
           payload: data.message,
         });
       }
