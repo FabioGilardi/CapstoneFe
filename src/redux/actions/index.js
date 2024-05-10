@@ -40,6 +40,8 @@ export const REGISTER_HAS_ERRORS = "REGISTER_HAS_ERRORS";
 export const LOGIN_HAS_ERRORS = "LOGIN_HAS_ERRORS";
 export const SAVE_CURRENT_USER = "SAVE_CURRENT_USER";
 export const CURRENT_USER_IS_LOADING = "CURRENT_USER_IS_LOADING";
+export const USER_PUT_HAS_ERRORS = "USER_PUT_HAS_ERRORS";
+export const USER_PUT_IS_OK = "USER_PUT_IS_OK";
 
 // AUTH REDUCER ACTIONS
 
@@ -142,6 +144,39 @@ export const getUserMe = (accessToken) => {
         type: CURRENT_USER_IS_LOADING,
         payload: false,
       });
+    }
+  };
+};
+
+export const putUserMe = (accessToken, payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseUrlAuth + "/users/me", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        dispatch({
+          type: USER_PUT_IS_OK,
+          payload: true,
+        });
+        dispatch({
+          type: USER_PUT_HAS_ERRORS,
+          payload: null,
+        });
+      } else {
+        const data = await response.json();
+        dispatch({
+          type: USER_PUT_HAS_ERRORS,
+          payload: data.message,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };

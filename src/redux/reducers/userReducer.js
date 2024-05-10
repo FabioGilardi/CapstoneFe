@@ -1,8 +1,15 @@
-import { CURRENT_USER_IS_LOADING, SAVE_CURRENT_USER } from "../actions";
+import {
+  CURRENT_USER_IS_LOADING,
+  SAVE_CURRENT_USER,
+  USER_PUT_HAS_ERRORS,
+  USER_PUT_IS_OK,
+} from "../actions";
 
 const initialState = {
   currentUser: {},
   isLoadingCurrentUser: false,
+  userPutHasErrors: null,
+  userPutIsOk: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -17,6 +24,18 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingCurrentUser: action.payload,
+      };
+
+    case USER_PUT_IS_OK:
+      return {
+        ...state,
+        userPutIsOk: action.payload,
+      };
+
+    case USER_PUT_HAS_ERRORS:
+      return {
+        ...state,
+        userPutHasErrors: action.payload,
       };
 
     default:

@@ -5,10 +5,13 @@ import Button from "react-bootstrap/Button";
 import SideBarProfilePage from "./SideBarProfilePage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUserMe } from "../redux/actions";
+import { USER_PUT_IS_OK, getUserMe } from "../redux/actions";
 import LoadingSpinner from "./LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
+
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const currentUser = useSelector((state) => state.userReducer.currentUser);
   const isLoadingCurrentUser = useSelector(
@@ -19,6 +22,10 @@ const ProfilePage = () => {
 
   useEffect(() => {
     dispatch(getUserMe(accessToken));
+    dispatch({
+      type: USER_PUT_IS_OK,
+      payload: false,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -62,6 +69,9 @@ const ProfilePage = () => {
                   <Button
                     variant="primary"
                     className="text-white rounded-pill w-50 fw-bold"
+                    onClick={() => {
+                      navigate("/profileUpdate");
+                    }}
                   >
                     UPDATE
                   </Button>
