@@ -50,5 +50,9 @@ body,
   border: 2px solid #ff6600;
 }
 
+.star:hover {
+  cursor: pointer;
+}
+
 // Import BS
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

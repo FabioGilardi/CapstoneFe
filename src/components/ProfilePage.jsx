@@ -15,14 +15,23 @@ import {
   USER_PUT_IS_OK,
   getUserMe,
   saveReservations,
+  saveReview,
   updateReservation,
+  updateReview,
 } from "../redux/actions";
 import LoadingSpinner from "./LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 import ReservationCard from "./ReservationCard";
+import ReviewCard from "./ReviewCard";
 
 const ProfilePage = () => {
-  const initialForm = {
+  const initialRevForm = {
+    title: "",
+    description: "",
+    rating: "",
+  };
+
+  const initialResForm = {
     date: "",
     time: "",
   };
@@ -33,6 +42,8 @@ const ProfilePage = () => {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const currentUser = useSelector((state) => state.userReducer.currentUser);
   const isLoadingCurrentUser = useSelector(
@@ -41,28 +52,54 @@ const ProfilePage = () => {
   const reservationList = useSelector(
     (state) => state.reservationReducer.reservations
   );
+  const isLoadingReservation = useSelector(
+    (state) => state.reservationReducer.isLoadingReservation
+  );
   const reservationUpdateIsOk = useSelector(
     (state) => state.reservationReducer.reservationUpdateIsOk
   );
   const reservationUpdateHasErrors = useSelector(
     (state) => state.reservationReducer.reservationUpdateHasErrors
   );
+  const reviewList = useSelector((state) => state.reviewReducer.reviews);
+  const reviewIsLoading = useSelector(
+    (state) => state.reviewReducer.isLoadingReviews
+  );
+  const reviewUpdateIsOk = useSelector(
+    (state) => state.reviewReducer.reviewUpdateIsOk
+  );
+  const reviewUpdateHasErrors = useSelector(
+    (state) => state.reviewReducer.reviewUpdateHasErrors
+  );
 
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [resForm, setResForm] = useState(initialResForm);
+  const [revForm, setRevForm] = useState(initialRevForm);
+  const [fetchForm, setFetchForm] = useState(initialFetchForm);
+  const [activeCardId, setActiveCardId] = useState(null);
+
   const handleClose = () => {
     setShow(false);
     dispatch(saveReservations(accessToken));
   };
   const handleShow = () => setShow(true);
-  const [form, setForm] = useState(initialForm);
-  const [fetchForm, setFetchForm] = useState(initialFetchForm);
-  const [activeCardId, setActiveCardId] = useState(null);
+  const handleClose2 = () => {
+    setShow2(false);
+    dispatch(saveReview(accessToken));
+  };
+  const handleShow2 = () => setShow2(true);
 
-  const dispatch = useDispatch();
+  const handleResForm = (e, attribute) => {
+    setResForm({
+      ...resForm,
+      [attribute]: e.target.value,
+    });
+  };
 
-  const handleChange = (e, attribute) => {
-    setForm({
-      ...form,
+  const handleRevForm = (e, attribute) => {
+    setRevForm({
+      ...revForm,
       [attribute]: e.target.value,
     });
   };
@@ -86,14 +123,15 @@ const ProfilePage = () => {
       payload: null,
     });
     dispatch(saveReservations(accessToken));
+    dispatch(saveReview(accessToken));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setFetchForm({
-      reservationDate: form.date + form.time,
+      reservationDate: resForm.date + resForm.time,
     });
-  }, [form]);
+  }, [resForm]);
 
   return (
     <Container className={isLoadingCurrentUser ? "py-3 h-100" : "py-3"}>
@@ -142,34 +180,63 @@ const ProfilePage = () => {
                     UPDATE
                   </Button>
                 </div>
-                <h4 className="fw-bold mt-5">MY BOOKINGS</h4>
-                <p>Here you can find all bookings with sellers.</p>
-                <p>
-                  Feel free to change the day and time of a reservation or
-                  cancel it, after all we know that unexpected events are always
-                  around the corner.
-                </p>
-                <p>
-                  If you need to contact one of our sellers directly, don&apos;t
-                  hesitate, we are always at your disposal.
-                </p>
-                {reservationList.length === 0 && (
-                  <p className="fst-italic text-center text-primary">
-                    There are no reservations yet
+                <div className="border-bottom border-tertiary border-2 pb-5 mt-2">
+                  <h4 className="fw-bold mt-5">MY BOOKINGS</h4>
+                  <p>Here you can find all bookings with sellers.</p>
+                  <p>
+                    Feel free to change the day and time of a reservation or
+                    cancel it, after all we know that unexpected events are
+                    always around the corner.
                   </p>
-                )}
-                <Row xs={2}>
-                  {reservationList.map((reservation) => {
-                    return (
-                      <ReservationCard
-                        key={reservation.id}
-                        reservation={reservation}
-                        modalShow={handleShow}
-                        activeCardId={setActiveCardId}
-                      />
-                    );
-                  })}
-                </Row>
+                  <p>
+                    If you need to contact one of our sellers directly,
+                    don&apos;t hesitate, we are always at your disposal.
+                  </p>
+                  {reservationList.length === 0 && (
+                    <p className="fst-italic text-center text-primary">
+                      There are no reservations yet
+                    </p>
+                  )}
+                  {!isLoadingReservation && (
+                    <Row xs={1} md={2}>
+                      {reservationList.map((reservation) => {
+                        return (
+                          <ReservationCard
+                            key={reservation.id}
+                            reservation={reservation}
+                            modalShow={handleShow}
+                            activeCardId={setActiveCardId}
+                          />
+                        );
+                      })}
+                    </Row>
+                  )}
+                </div>
+                <div>
+                  <h4 className="fw-bold mt-5">MY REVIEWS</h4>
+                  <p>
+                    Here you can find all the reviews you have written about our
+                    service.
+                  </p>
+                  <p>
+                    Remember that your opinion is important as it allows us to
+                    continuously improve.
+                  </p>
+                  {!reviewIsLoading && (
+                    <Row xs={1} md={2}>
+                      {reviewList.map((review) => {
+                        return (
+                          <ReviewCard
+                            key={review.id}
+                            review={review}
+                            modalShow={handleShow2}
+                            activeCardId={setActiveCardId}
+                          />
+                        );
+                      })}
+                    </Row>
+                  )}
+                </div>
               </Col>
             </Row>
           </Col>
@@ -203,6 +270,7 @@ const ProfilePage = () => {
             onSubmit={(e) => {
               e.preventDefault();
               dispatch(updateReservation(accessToken, fetchForm, activeCardId));
+              setResForm(initialResForm);
             }}
           >
             <Form.Group className="mb-3">
@@ -213,10 +281,10 @@ const ProfilePage = () => {
                 className="border rounded-pill border-primary"
                 type="date"
                 placeholder="DATE"
-                value={form.date}
+                value={resForm.date}
                 required
                 onChange={(e) => {
-                  handleChange(e, "date");
+                  handleResForm(e, "date");
                 }}
               />
             </Form.Group>
@@ -227,8 +295,9 @@ const ProfilePage = () => {
               <Form.Select
                 aria-label="Default select example"
                 className="border rounded-pill border-primary"
+                required
                 onChange={(e) => {
-                  handleChange(e, "time");
+                  handleResForm(e, "time");
                 }}
               >
                 <option></option>
@@ -256,6 +325,96 @@ const ProfilePage = () => {
               className="text-white"
               type="submit"
               form="fetchForm"
+            >
+              Save Changes
+            </Button>
+          )}
+        </Modal.Footer>
+      </Modal>
+      <Modal show={show2} onHide={handleClose2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Change Review</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {reviewUpdateIsOk === true && (
+            <>
+              <Alert
+                variant="success"
+                className="d-flex justify-content-between align-items-center"
+              >
+                <i className="bi bi-check-circle fs-2"></i> Your reservation has
+                been changed successfully
+              </Alert>
+            </>
+          )}
+          {reviewUpdateIsOk === false && reviewUpdateHasErrors !== null && (
+            <Alert variant="danger">
+              <i className="bi bi-exclamation-triangle"></i>{" "}
+              {reviewUpdateHasErrors}
+            </Alert>
+          )}
+          <Form
+            id="revForm"
+            onSubmit={(e) => {
+              e.preventDefault();
+              dispatch(updateReview(accessToken, revForm, activeCardId));
+              setRevForm(initialRevForm);
+            }}
+          >
+            <Form.Group className="mb-3">
+              <Form.Control
+                className="border rounded-pill border-primary"
+                type="text"
+                placeholder="TITLE"
+                value={revForm.title}
+                required
+                onChange={(e) => {
+                  handleRevForm(e, "title");
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Control
+                className="border rounded-pill border-primary"
+                type="text"
+                placeholder="DESCRIPTION"
+                value={revForm.description}
+                required
+                onChange={(e) => {
+                  handleRevForm(e, "description");
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <i
+                  key={value}
+                  onClick={() => {
+                    setRevForm({
+                      ...revForm,
+                      rating: value,
+                    });
+                  }}
+                  className={
+                    value <= revForm.rating
+                      ? "bi bi-star-fill text-warning ms-2 fs-4 star"
+                      : "bi bi-star text-warning ms-2 fs-4 star"
+                  }
+                ></i>
+              ))}
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose2}>
+            Close
+          </Button>
+          {!reviewUpdateIsOk && (
+            <Button
+              variant="primary"
+              className="text-white"
+              type="submit"
+              form="revForm"
             >
               Save Changes
             </Button>

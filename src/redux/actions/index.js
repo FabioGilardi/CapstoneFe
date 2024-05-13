@@ -48,6 +48,10 @@ export const SAVE_RESERVATIONS = "SAVE_RESERVATIONS";
 export const RESERVATION_IS_LOADING = "RESERVATION_IS_LOADING";
 export const RESERVATION_UPDATE_IS_OK = "RESERVATION_UPDATE_IS_OK";
 export const RESERVATION_UPDATE_HAS_ERRORS = "RESERVATION_UPDATE_HAS_ERRORS";
+export const SAVE_REVIEW = "SAVE_REVIEW";
+export const REVIEW_IS_LOADING = "REVIEW_IS_LOADING";
+export const REVIEW_UPDATE_IS_OK = "REVIEW_UPDATE_IS_OK";
+export const REVIEW_UPDATE_HAS_ERRORS = "REVIEW_UPDATE_HAS_ERRORS";
 
 // AUTH REDUCER ACTIONS
 
@@ -288,3 +292,67 @@ export const updateReservation = (accessToken, payload, id) => {
 };
 
 // REVIEWS REDUCRE ACTIONS
+
+export const saveReview = (accessToken) => {
+  return async (dispatch) => {
+    dispatch({
+      type: REVIEW_IS_LOADING,
+      payload: true,
+    });
+    try {
+      const response = await fetch(baseUrl + "/reviews/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: SAVE_REVIEW,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch({
+        type: REVIEW_IS_LOADING,
+        payload: false,
+      });
+    }
+  };
+};
+
+export const updateReview = (accessToken, payload, id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseUrl + "/reviews/" + id, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        dispatch({
+          type: REVIEW_UPDATE_IS_OK,
+          payload: true,
+        });
+        dispatch({
+          type: REVIEW_UPDATE_HAS_ERRORS,
+          payload: null,
+        });
+      } else {
+        const data = await response.json();
+        dispatch({
+          type: REVIEW_UPDATE_HAS_ERRORS,
+          payload: data.message,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
