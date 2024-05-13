@@ -3,9 +3,13 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { useDispatch, useSelector } from "react-redux";
-import { saveReservations } from "../redux/actions";
+import {
+  RESERVATION_UPDATE_HAS_ERRORS,
+  RESERVATION_UPDATE_IS_OK,
+  saveReservations,
+} from "../redux/actions";
 
-const ReservationCard = ({ reservation }) => {
+const ReservationCard = ({ reservation, modalShow, activeCardId }) => {
   const accessToken = useSelector((state) => state.authReducer.accessToken);
 
   const dispatch = useDispatch();
@@ -41,7 +45,22 @@ const ReservationCard = ({ reservation }) => {
             </p>
           </Card.Text>
           <div className="d-flex justify-content-between">
-            <Button variant="primary" className="text-white">
+            <Button
+              variant="primary"
+              className="text-white"
+              onClick={(e) => {
+                activeCardId(e.target.closest(".col").id);
+                modalShow();
+                dispatch({
+                  type: RESERVATION_UPDATE_IS_OK,
+                  payload: false,
+                });
+                dispatch({
+                  type: RESERVATION_UPDATE_HAS_ERRORS,
+                  payload: null,
+                });
+              }}
+            >
               <i className="bi bi-clock"></i> Change
             </Button>
             <Button

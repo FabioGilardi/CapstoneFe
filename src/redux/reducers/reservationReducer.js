@@ -1,8 +1,15 @@
-import { RESERVATION_IS_LOADING, SAVE_RESERVATIONS } from "../actions";
+import {
+  RESERVATION_IS_LOADING,
+  RESERVATION_UPDATE_HAS_ERRORS,
+  RESERVATION_UPDATE_IS_OK,
+  SAVE_RESERVATIONS,
+} from "../actions";
 
 const initialState = {
   reservations: [],
   isLoadingReservation: false,
+  reservationUpdateIsOk: false,
+  reservationUpdateHasErrors: null,
 };
 
 const reservationReducer = (state = initialState, action) => {
@@ -17,6 +24,18 @@ const reservationReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingReservation: action.payload,
+      };
+
+    case RESERVATION_UPDATE_IS_OK:
+      return {
+        ...state,
+        reservationUpdateIsOk: action.payload,
+      };
+
+    case RESERVATION_UPDATE_HAS_ERRORS:
+      return {
+        ...state,
+        reservationUpdateHasErrors: action.payload,
       };
 
     default:
