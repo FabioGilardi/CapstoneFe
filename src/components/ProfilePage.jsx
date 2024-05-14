@@ -222,6 +222,11 @@ const ProfilePage = () => {
                     Remember that your opinion is important as it allows us to
                     continuously improve.
                   </p>
+                  {reviewList.length === 0 && (
+                    <p className="fst-italic text-center text-primary">
+                      There are no reviews yet
+                    </p>
+                  )}
                   {!reviewIsLoading && (
                     <Row xs={1} md={2}>
                       {reviewList.map((review) => {

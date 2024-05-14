@@ -52,6 +52,8 @@ export const SAVE_REVIEW = "SAVE_REVIEW";
 export const REVIEW_IS_LOADING = "REVIEW_IS_LOADING";
 export const REVIEW_UPDATE_IS_OK = "REVIEW_UPDATE_IS_OK";
 export const REVIEW_UPDATE_HAS_ERRORS = "REVIEW_UPDATE_HAS_ERRORS";
+export const SAVE_CAR = "SAVE_CAR";
+export const CAR_IS_LOADING = "CAR_IS_LOADING";
 
 // AUTH REDUCER ACTIONS
 
@@ -353,6 +355,39 @@ export const updateReview = (accessToken, payload, id) => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+// CAR REDUCER
+
+export const saveCars = (accessToken) => {
+  return async (dispatch) => {
+    dispatch({
+      type: CAR_IS_LOADING,
+      payload: true,
+    });
+    try {
+      const response = await fetch(baseUrl + "/cars", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: SAVE_CAR,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch({
+        type: CAR_IS_LOADING,
+        payload: false,
+      });
     }
   };
 };

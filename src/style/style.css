@@ -62,6 +62,7 @@ body,
 
 .carCardHover {
   box-shadow: 0px 0px 23px 5px rgb(186, 186, 186);
+  cursor: pointer;
 }
 
 /*!
