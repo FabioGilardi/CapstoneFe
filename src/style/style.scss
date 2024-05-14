@@ -59,5 +59,17 @@ body,
   top: 30px;
 }
 
+.warrentyDiv {
+  background-color: #ffefe5;
+  background-image: url("https://www.automobile.it/_next/static/media/trust-section-bg.fa9d7790.svg");
+  background-repeat: no-repeat;
+  background-position-x: 101%;
+  background-position-y: 25px;
+}
+
+.carCardHover {
+  box-shadow: 0px 0px 23px 5px rgba(186, 186, 186, 1);
+}
+
 // Import BS
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
