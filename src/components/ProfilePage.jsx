@@ -143,7 +143,6 @@ const ProfilePage = () => {
               <SideBarProfilePage
                 imgSrc={currentUser.avatar}
                 username={currentUser.username}
-                className="position-absolute"
               />
               <Col xs={12} md={9} className="ps-4">
                 <h4 className="fw-bold">MY PROFILE</h4>
