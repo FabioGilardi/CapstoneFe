@@ -54,5 +54,10 @@ body,
   cursor: pointer;
 }
 
+.sidefixed {
+  position: sticky;
+  top: 30px;
+}
+
 // Import BS
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

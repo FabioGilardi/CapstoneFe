@@ -139,10 +139,11 @@ const ProfilePage = () => {
       {!isLoadingCurrentUser && (
         <Row className="justify-content-center my-md-5">
           <Col xs={12} md={12} lg={8}>
-            <Row className="justify-content-center">
+            <Row className="justify-content-center position-relative">
               <SideBarProfilePage
                 imgSrc={currentUser.avatar}
                 username={currentUser.username}
+                className="position-absolute"
               />
               <Col xs={12} md={9} className="ps-4">
                 <h4 className="fw-bold">MY PROFILE</h4>
