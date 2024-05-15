@@ -1,17 +1,38 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useNavigate, useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
+import Alert from "react-bootstrap/Alert";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saveSingleCar } from "../redux/actions";
-import { Button } from "react-bootstrap";
+import { addReservation, getSellers, saveSingleCar } from "../redux/actions";
 
 const SingleCar = () => {
   const param = useParams().id;
 
+  const initialDateForm = {
+    date: "",
+    time: "",
+  };
+
+  const initialFetchForm = {
+    reservationDate: "",
+    sellerId: "",
+    carId: Number(param),
+  };
+
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const singleCar = useSelector((state) => state.carReducer.singleCar);
+  const sellerList = useSelector((state) => state.userReducer.sellers);
+  const addReservationIsOK = useSelector(
+    (state) => state.reservationReducer.addReservationIsOK
+  );
+  const addReservationHasErrors = useSelector(
+    (state) => state.reservationReducer.addReservationHasErrors
+  );
 
   const dispatch = useDispatch();
 
@@ -21,6 +42,8 @@ const SingleCar = () => {
   const [consumption, setConsumption] = useState(false);
   const [aesthetic, setAesthetic] = useState(false);
   const [accessories, setAccessories] = useState(false);
+  const [fetchForm, setFetchForm] = useState(initialFetchForm);
+  const [dateForm, setDateForm] = useState(initialDateForm);
 
   const handleBaseData = () => {
     setBaseData(true);
@@ -45,6 +68,13 @@ const SingleCar = () => {
     setConsumption(false);
     setAesthetic(false);
     setAccessories(true);
+  };
+
+  const handleDateForm = (e, attribute) => {
+    setDateForm({
+      ...dateForm,
+      [attribute]: e.target.value,
+    });
   };
 
   const stringManipulation = (string) => {
@@ -78,8 +108,17 @@ const SingleCar = () => {
   };
 
   useEffect(() => {
+    setFetchForm({
+      ...fetchForm,
+      reservationDate: dateForm.date + dateForm.time,
+    });
+  }, [dateForm]);
+
+  useEffect(() => {
     dispatch(saveSingleCar(accessToken, param));
-  });
+    dispatch(getSellers(accessToken));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container>
@@ -405,6 +444,143 @@ const SingleCar = () => {
                 </Col>
               )}
             </Row>
+            <h4 className="fw-bold mt-5 mb-4">BOOK A MEETING</h4>
+            {sellerList !== null && (
+              <Row>
+                <Col xs={12} xl={8}>
+                  {addReservationIsOK === true && (
+                    <Alert
+                      variant="success"
+                      className="d-flex align-items-center justify-content-center"
+                    >
+                      <i className="bi bi-check-circle fs-2 me-2"></i>
+                      <div>
+                        <p className="mb-0">
+                          Your reservation has been added successfully
+                        </p>
+                        <p className="mb-0">
+                          Go to{" "}
+                          <Link to="/profile" className="text-decoration-none">
+                            My Reservations
+                          </Link>
+                        </p>
+                      </div>
+                    </Alert>
+                  )}
+                  {addReservationHasErrors !== null && (
+                    <Alert variant="danger">
+                      <i className="bi bi-exclamation-triangle"></i>{" "}
+                      {addReservationHasErrors}
+                    </Alert>
+                  )}
+                  {!addReservationIsOK && (
+                    <Form
+                      id="reservationForm"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        dispatch(addReservation(accessToken, fetchForm));
+                      }}
+                    >
+                      <Form.Group className="mb-4">
+                        <Form.Label className="text-black opacity-75 fw-bold">
+                          DATE
+                        </Form.Label>
+                        <Form.Control
+                          className="border rounded-pill border-primary"
+                          type="date"
+                          placeholder="DATE"
+                          required
+                          value={dateForm.date}
+                          onChange={(e) => {
+                            handleDateForm(e, "date");
+                          }}
+                        />
+                      </Form.Group>
+                      <Form.Group className="mb-3">
+                        <Form.Label className="text-black opacity-75 fw-bold">
+                          TIME
+                        </Form.Label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          className="border rounded-pill border-primary"
+                          value={dateForm.time}
+                          onChange={(e) => {
+                            handleDateForm(e, "time");
+                          }}
+                          required
+                        >
+                          <option></option>
+                          <option value="T9:00:00.000">9.00</option>
+                          <option value="T10:00:00.000">10.00</option>
+                          <option value="T11:00:00.000">11.00</option>
+                          <option value="T12:00:00.000">12.00</option>
+                          <option value="T13:00:00.000">13.00</option>
+                          <option value="T14:00:00.000">14.00</option>
+                          <option value="T15:00:00.000">15.00</option>
+                          <option value="T16:00:00.000">16.00</option>
+                          <option value="T17:00:00.000">17.00</option>
+                          <option value="T18:00:00.000">18.00</option>
+                        </Form.Select>
+                      </Form.Group>
+                      <Form.Label className="text-black opacity-75 fw-bold mt-2">
+                        SELLERS
+                      </Form.Label>
+                      <Row>
+                        {sellerList.map((seller) => {
+                          return (
+                            <Col
+                              key={seller.id}
+                              id={seller.id}
+                              xs={6}
+                              md={3}
+                              className="d-flex justify-content-md-center justify-content-start mb-3 mt-md-3"
+                            >
+                              <Card
+                                className={
+                                  fetchForm.sellerId === seller.id
+                                    ? "w-100 border-primary star"
+                                    : "w-100 star"
+                                }
+                                onClick={() => {
+                                  setFetchForm({
+                                    ...fetchForm,
+                                    sellerId: seller.id,
+                                  });
+                                }}
+                              >
+                                <Card.Img
+                                  variant="center"
+                                  src={seller.avatar}
+                                  className="rounded-top"
+                                />
+                                <Card.Body>
+                                  <Card.Text className="text-center">
+                                    {stringManipulation(seller.name) +
+                                      " " +
+                                      stringManipulation(seller.surname)}
+                                  </Card.Text>
+                                </Card.Body>
+                              </Card>
+                            </Col>
+                          );
+                        })}
+                      </Row>
+                      <div className="text-center">
+                        <Button
+                          variant="primary"
+                          size="lg"
+                          className="text-white w-50 mt-3 rounded-pill"
+                          form="reservationForm"
+                          type="submit"
+                        >
+                          <i className="bi bi-arrow-right"></i> SEND REQUEST
+                        </Button>
+                      </div>
+                    </Form>
+                  )}
+                </Col>
+              </Row>
+            )}
           </Col>
         )}
       </Row>

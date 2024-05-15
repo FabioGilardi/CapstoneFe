@@ -51,7 +51,12 @@ const CarCard = ({ car }) => {
                 {car.brand + " " + car.model}
               </h5>
               <div className="h-100">
-                <img src={car.picture} height="100%" width="100%"></img>
+                <img
+                  src={car.picture}
+                  height="220px"
+                  width="100%"
+                  style={{ objectFit: "cover" }}
+                ></img>
               </div>
             </Col>
             <Col lg={5} className="px-lg-4 mt-lg-0 mt-3">
@@ -66,7 +71,7 @@ const CarCard = ({ car }) => {
                 {car.registrationDate}
               </p>
               <p className="fw-bold mb-0 py-2 border-bottom border-secondary">
-                {car.kilometers} km
+                {formatNumber(car.kilometers)} km
               </p>
               <p className="fw-bold mb-0 py-2 border-bottom border-secondary">
                 {car.emissionClass.slice(0, 4) +

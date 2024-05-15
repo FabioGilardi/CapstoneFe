@@ -22,6 +22,7 @@ const ReservationCard = ({ reservation, modalShow, activeCardId }) => {
           src={reservation.car.picture}
           alt="card-pic"
           height={"200px"}
+          style={{ objectFit: "cover" }}
         />
         <Card.Body>
           <Card.Title className="fw-bold mb-4 text-center">

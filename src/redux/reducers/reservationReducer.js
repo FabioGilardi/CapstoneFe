@@ -1,4 +1,6 @@
 import {
+  ADD_RESERVATION_HAS_ERRORS,
+  ADD_RESERVATION_IS_OK,
   RESERVATION_IS_LOADING,
   RESERVATION_UPDATE_HAS_ERRORS,
   RESERVATION_UPDATE_IS_OK,
@@ -10,6 +12,8 @@ const initialState = {
   isLoadingReservation: false,
   reservationUpdateIsOk: false,
   reservationUpdateHasErrors: null,
+  addReservationIsOK: false,
+  addReservationHasErrors: null,
 };
 
 const reservationReducer = (state = initialState, action) => {
@@ -36,6 +40,18 @@ const reservationReducer = (state = initialState, action) => {
       return {
         ...state,
         reservationUpdateHasErrors: action.payload,
+      };
+
+    case ADD_RESERVATION_IS_OK:
+      return {
+        ...state,
+        addReservationIsOK: action.payload,
+      };
+
+    case ADD_RESERVATION_HAS_ERRORS:
+      return {
+        ...state,
+        addReservationHasErrors: action.payload,
       };
 
     default:

@@ -55,6 +55,10 @@ export const REVIEW_UPDATE_HAS_ERRORS = "REVIEW_UPDATE_HAS_ERRORS";
 export const SAVE_CAR = "SAVE_CAR";
 export const CAR_IS_LOADING = "CAR_IS_LOADING";
 export const SAVE_SINGLE_CAR = "SAVE_SINGLE_CAR";
+export const SAVE_SELLERS = "SAVE_SELLERS";
+export const ADD_RESERVATION = "ADD_RESERVATION";
+export const ADD_RESERVATION_IS_OK = "ADD_RESERVATION_IS_OK";
+export const ADD_RESERVATION_HAS_ERRORS = "ADD_RESERVATION_HAS_ERRORS";
 
 // AUTH REDUCER ACTIONS
 
@@ -157,6 +161,28 @@ export const getUserMe = (accessToken) => {
         type: CURRENT_USER_IS_LOADING,
         payload: false,
       });
+    }
+  };
+};
+
+export const getSellers = (accessToken) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseUrl + "/users/sellers", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: SAVE_SELLERS,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };
@@ -285,6 +311,39 @@ export const updateReservation = (accessToken, payload, id) => {
         const data = await response.json();
         dispatch({
           type: RESERVATION_UPDATE_HAS_ERRORS,
+          payload: data.message,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const addReservation = (accessToken, payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseUrl + "/reservations", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        dispatch({
+          type: ADD_RESERVATION_IS_OK,
+          payload: true,
+        });
+        dispatch({
+          type: ADD_RESERVATION_HAS_ERRORS,
+          payload: null,
+        });
+      } else {
+        const data = await response.json();
+        dispatch({
+          type: ADD_RESERVATION_HAS_ERRORS,
           payload: data.message,
         });
       }

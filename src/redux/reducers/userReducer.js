@@ -3,6 +3,7 @@ import {
   PASSWORD_HAS_ERRORS,
   PASSWORD_IS_OK,
   SAVE_CURRENT_USER,
+  SAVE_SELLERS,
   USER_PUT_HAS_ERRORS,
   USER_PUT_IS_OK,
 } from "../actions";
@@ -14,6 +15,7 @@ const initialState = {
   userPutIsOk: false,
   passwordHasErrors: null,
   passwordIsOK: null,
+  sellers: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -52,6 +54,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         passwordIsOK: action.payload,
+      };
+
+    case SAVE_SELLERS:
+      return {
+        ...state,
+        sellers: action.payload,
       };
 
     default:
