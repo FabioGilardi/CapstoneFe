@@ -2,8 +2,11 @@
 import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { useNavigate } from "react-router-dom";
 
 const CarCard = ({ car }) => {
+  const navigate = useNavigate();
+
   const [cardHover, setCardHOver] = useState(false);
 
   const formatNumber = (num) => {
@@ -35,6 +38,9 @@ const CarCard = ({ car }) => {
       }}
       onMouseLeave={() => {
         setCardHOver(false);
+      }}
+      onClick={() => {
+        navigate("/car/" + car.id);
       }}
     >
       <Row className="p-3 flex-column h-100">

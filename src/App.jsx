@@ -7,6 +7,7 @@ import ProfilePage from "./components/ProfilePage";
 import UpdateProfile from "./components/UpdateProfile";
 import ChangePassword from "./components/ChangePassword";
 import CollectionPage from "./components/CollectionPage";
+import SingleCar from "./components/SingleCar";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/profileUpdate" element={<UpdateProfile />} />
             <Route path="/changePassword" element={<ChangePassword />} />
             <Route path="/collection" element={<CollectionPage />} />
+            <Route path="/car/:id" element={<SingleCar />} />
           </Routes>
         </main>
         <CustomFooter />
