@@ -1,8 +1,9 @@
-import { CAR_IS_LOADING, SAVE_CAR } from "../actions";
+import { CAR_IS_LOADING, SAVE_CAR, SAVE_SINGLE_CAR } from "../actions";
 
 const initialState = {
   cars: null,
   isLoadingCars: false,
+  singleCar: null,
 };
 
 const carReducer = (state = initialState, action) => {
@@ -17,6 +18,12 @@ const carReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingCars: action.payload,
+      };
+
+    case SAVE_SINGLE_CAR:
+      return {
+        ...state,
+        singleCar: action.payload,
       };
 
     default:

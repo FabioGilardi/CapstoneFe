@@ -73,5 +73,10 @@ body,
   cursor: pointer;
 }
 
+.carPageBack:hover {
+  background-color: whitesmoke !important;
+  border-color: #ff6600 !important;
+}
+
 // Import BS
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

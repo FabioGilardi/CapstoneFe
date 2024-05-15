@@ -54,6 +54,7 @@ export const REVIEW_UPDATE_IS_OK = "REVIEW_UPDATE_IS_OK";
 export const REVIEW_UPDATE_HAS_ERRORS = "REVIEW_UPDATE_HAS_ERRORS";
 export const SAVE_CAR = "SAVE_CAR";
 export const CAR_IS_LOADING = "CAR_IS_LOADING";
+export const SAVE_SINGLE_CAR = "SAVE_SINGLE_CAR";
 
 // AUTH REDUCER ACTIONS
 
@@ -388,6 +389,28 @@ export const saveCars = (accessToken) => {
         type: CAR_IS_LOADING,
         payload: false,
       });
+    }
+  };
+};
+
+export const saveSingleCar = (accessToken, id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseUrl + "/cars/" + id, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: SAVE_SINGLE_CAR,
+          payload: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };
