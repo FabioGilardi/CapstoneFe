@@ -47,6 +47,16 @@ const CustomNavbar = () => {
             </Link>
             <Link
               className={
+                location === "/about"
+                  ? "nav-link active hover"
+                  : "nav-link hover"
+              }
+              to="/about"
+            >
+              About Us
+            </Link>
+            <Link
+              className={
                 location === "/contact"
                   ? "nav-link active hover"
                   : "nav-link hover"

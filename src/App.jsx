@@ -8,6 +8,7 @@ import UpdateProfile from "./components/UpdateProfile";
 import ChangePassword from "./components/ChangePassword";
 import CollectionPage from "./components/CollectionPage";
 import SingleCar from "./components/SingleCar";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
@@ -16,14 +17,7 @@ function App() {
         <CustomNavbar />
         <main className="flex-grow-1">
           <Routes>
-            <Route
-              path="/"
-              element={
-                <h1 className="text-center text-primary">
-                  <i className="bi bi-airplane"></i> READY
-                </h1>
-              }
-            />
+            <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/profile" element={<ProfilePage />} />

@@ -48,7 +48,7 @@ body,
 }
 
 .cardhover:hover {
-  border: 2px solid #ff6600;
+  box-shadow: 0px 0px 23px 5px rgba(186, 186, 186, 1) !important;
 }
 
 .star:hover {
@@ -76,6 +76,19 @@ body,
 .carPageBack:hover {
   background-color: whitesmoke !important;
   border-color: #ff6600 !important;
+}
+
+.hero-text {
+  font-size: 5rem;
+  -webkit-text-stroke: 1px black;
+}
+
+.hero {
+  background-image: url("../assets/images/hero.jpg");
+  height: 90vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: 20%;
 }
 
 // Import BS

@@ -16,12 +16,13 @@ const CollectionPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(saveCars(accessToken));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Container className="pb-5">
+    <Container className="pb-5" id="topCollection">
       <Row className="justify-content-evenly">
         <Col xs={10} sm={11} lg={12}>
           <h2 className="fw-bold text-center py-4 border-bottom border-secondary border-2 mb-0">

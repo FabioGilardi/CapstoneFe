@@ -8,7 +8,12 @@ import Alert from "react-bootstrap/Alert";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addReservation, getSellers, saveSingleCar } from "../redux/actions";
+import {
+  ADD_RESERVATION_IS_OK,
+  addReservation,
+  getSellers,
+  saveSingleCar,
+} from "../redux/actions";
 
 const SingleCar = () => {
   const param = useParams().id;
@@ -115,8 +120,13 @@ const SingleCar = () => {
   }, [dateForm]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(saveSingleCar(accessToken, param));
     dispatch(getSellers(accessToken));
+    dispatch({
+      type: ADD_RESERVATION_IS_OK,
+      payload: false,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
