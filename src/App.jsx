@@ -9,6 +9,7 @@ import ChangePassword from "./components/ChangePassword";
 import CollectionPage from "./components/CollectionPage";
 import SingleCar from "./components/SingleCar";
 import HomePage from "./components/HomePage";
+import AboutUsPage from "./components/AboutUsPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/changePassword" element={<ChangePassword />} />
             <Route path="/collection" element={<CollectionPage />} />
             <Route path="/car/:id" element={<SingleCar />} />
+            <Route path="/about" element={<AboutUsPage />} />
           </Routes>
         </main>
         <CustomFooter />
