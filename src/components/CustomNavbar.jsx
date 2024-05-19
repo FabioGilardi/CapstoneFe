@@ -6,8 +6,10 @@ import logo from "../assets/images/logo.png";
 import { useSelector } from "react-redux";
 
 const CustomNavbar = () => {
+  // MAIN FUNCTIONS
   const location = useLocation().pathname;
 
+  // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
 
   return (

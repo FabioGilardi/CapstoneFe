@@ -10,6 +10,11 @@ import { putUserMe } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
+  // MAIN FUNCTIONS
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const currentUser = useSelector((state) => state.userReducer.currentUser);
   const userPutHasErrors = useSelector(
@@ -17,6 +22,7 @@ const UpdateProfile = () => {
   );
   const userPutIsOk = useSelector((state) => state.userReducer.userPutIsOk);
 
+  // FORM FEATURES
   const initialForm = {
     username: currentUser.username,
     email: currentUser.email,
@@ -25,10 +31,6 @@ const UpdateProfile = () => {
   };
 
   const [form, setForm] = useState(initialForm);
-
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const handleChange = (e, attribute) => {
     setForm({

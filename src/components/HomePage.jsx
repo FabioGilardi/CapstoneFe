@@ -13,28 +13,12 @@ import sellersTeam from "../assets/images/sellerTeam.jpg";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
-  const initialRevForm = {
-    title: "",
-    description: "",
-    rating: "",
-  };
+  // GLOBAL FUNCTIONS
+  const dispatch = useDispatch();
 
-  const [revForm, setRevForm] = useState(initialRevForm);
-  const [show2, setShow2] = useState(false);
+  const navigate = useNavigate();
 
-  const handleClose2 = () => {
-    setShow2(false);
-    dispatch(saveAllUsersReview(accessToken));
-  };
-  const handleShow2 = () => setShow2(true);
-
-  const handleRevForm = (e, attribute) => {
-    setRevForm({
-      ...revForm,
-      [attribute]: e.target.value,
-    });
-  };
-
+  // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const allReviews = useSelector(
     (state) => state.reviewReducer.allUsersReviews
@@ -46,10 +30,33 @@ const HomePage = () => {
     (state) => state.reviewReducer.newReviewHasErrors
   );
 
-  const dispatch = useDispatch();
+  // REVIEW FORM
+  const initialRevForm = {
+    title: "",
+    description: "",
+    rating: "",
+  };
 
-  const navigate = useNavigate();
+  const [revForm, setRevForm] = useState(initialRevForm);
 
+  const handleRevForm = (e, attribute) => {
+    setRevForm({
+      ...revForm,
+      [attribute]: e.target.value,
+    });
+  };
+
+  // REVIEW MODAL
+  const [show2, setShow2] = useState(false);
+
+  const handleClose2 = () => {
+    setShow2(false);
+    dispatch(saveAllUsersReview(accessToken));
+  };
+
+  const handleShow2 = () => setShow2(true);
+
+  // COMPONENT MOUNT/UPDATE
   useEffect(() => {
     dispatch(saveAllUsersReview(accessToken));
     // eslint-disable-next-line react-hooks/exhaustive-deps

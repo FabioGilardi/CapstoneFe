@@ -11,21 +11,24 @@ import { updatePassword } from "../redux/actions";
 import { Link } from "react-router-dom";
 
 const ChangePassword = () => {
-  const initialForm = {
-    oldPassword: "",
-    newPassword: "",
-  };
-
-  const [form, setForm] = useState(initialForm);
-
+  // MAIN FUNCTIONS
   const dispatch = useDispatch();
 
+  // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const currentUser = useSelector((state) => state.userReducer.currentUser);
   const passwordIsOk = useSelector((state) => state.userReducer.passwordIsOK);
   const passwordHasErrors = useSelector(
     (state) => state.userReducer.passwordHasErrors
   );
+
+  // FORM FEATURES
+  const initialForm = {
+    oldPassword: "",
+    newPassword: "",
+  };
+
+  const [form, setForm] = useState(initialForm);
 
   const handleChange = (e, attribute) => {
     setForm({

@@ -9,12 +9,15 @@ import { Spinner } from "react-bootstrap";
 import quality from "../assets/images/quality logo.png";
 
 const CollectionPage = () => {
+  // MAIN FUNCTIONS
+  const dispatch = useDispatch();
+
+  // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const carList = useSelector((state) => state.carReducer.cars);
   const isLoadingCars = useSelector((state) => state.carReducer.isLoadingCars);
 
-  const dispatch = useDispatch();
-
+  // COMPONENT MOUNT/UPDATE
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(saveCars(accessToken));

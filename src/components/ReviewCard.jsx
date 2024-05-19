@@ -11,11 +11,12 @@ import {
 import { useLocation } from "react-router-dom";
 
 const ReviewCard = ({ review, modalShow, activeCardId }) => {
-  const accessToken = useSelector((state) => state.authReducer.accessToken);
-
+  // MAIN FUNCTIONS
   const dispatch = useDispatch();
-
   const location = useLocation().pathname;
+
+  // GLOBAL STATE
+  const accessToken = useSelector((state) => state.authReducer.accessToken);
 
   return (
     <Col id={review.id} className="mb-3">

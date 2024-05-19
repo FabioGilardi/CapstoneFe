@@ -25,25 +25,12 @@ import ReservationCard from "./ReservationCard";
 import ReviewCard from "./ReviewCard";
 
 const ProfilePage = () => {
-  const initialRevForm = {
-    title: "",
-    description: "",
-    rating: "",
-  };
-
-  const initialResForm = {
-    date: "",
-    time: "",
-  };
-
-  const initialFetchForm = {
-    reservationDate: "",
-  };
-
+  // MAIN FUNCTIONS
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
+  // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const currentUser = useSelector((state) => state.userReducer.currentUser);
   const isLoadingCurrentUser = useSelector(
@@ -72,30 +59,17 @@ const ProfilePage = () => {
     (state) => state.reviewReducer.reviewUpdateHasErrors
   );
 
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
-  const [resForm, setResForm] = useState(initialResForm);
-  const [revForm, setRevForm] = useState(initialRevForm);
-  const [fetchForm, setFetchForm] = useState(initialFetchForm);
+  // LOCAL STATE
   const [activeCardId, setActiveCardId] = useState(null);
 
-  const handleClose = () => {
-    setShow(false);
-    dispatch(saveReservations(accessToken));
+  // REVIEW FORM FEATURES
+  const initialRevForm = {
+    title: "",
+    description: "",
+    rating: "",
   };
-  const handleShow = () => setShow(true);
-  const handleClose2 = () => {
-    setShow2(false);
-    dispatch(saveReview(accessToken));
-  };
-  const handleShow2 = () => setShow2(true);
 
-  const handleResForm = (e, attribute) => {
-    setResForm({
-      ...resForm,
-      [attribute]: e.target.value,
-    });
-  };
+  const [revForm, setRevForm] = useState(initialRevForm);
 
   const handleRevForm = (e, attribute) => {
     setRevForm({
@@ -104,6 +78,48 @@ const ProfilePage = () => {
     });
   };
 
+  // RESERVATION FORM FEATURES
+  const initialResForm = {
+    date: "",
+    time: "",
+  };
+
+  const [resForm, setResForm] = useState(initialResForm);
+
+  const handleResForm = (e, attribute) => {
+    setResForm({
+      ...resForm,
+      [attribute]: e.target.value,
+    });
+  };
+
+  // FETCH FORM FEATURES
+  const initialFetchForm = {
+    reservationDate: "",
+  };
+
+  const [fetchForm, setFetchForm] = useState(initialFetchForm);
+
+  // RESERVATION MODAL FEATURE
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+    dispatch(saveReservations(accessToken));
+  };
+  const handleShow = () => setShow(true);
+
+  // REVIEW MODAL FEATURE
+  const [show2, setShow2] = useState(false);
+
+  const handleClose2 = () => {
+    setShow2(false);
+    dispatch(saveReview(accessToken));
+  };
+
+  const handleShow2 = () => setShow2(true);
+
+  // COMPONENT MOUNT/UPDATE
   useEffect(() => {
     dispatch(getUserMe(accessToken));
     dispatch({

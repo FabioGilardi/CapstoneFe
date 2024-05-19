@@ -5,8 +5,8 @@ import { SAVE_ACCESS_TOKEN } from "../redux/actions";
 
 // eslint-disable-next-line react/prop-types
 const SideBarProfilePage = ({ imgSrc, username }) => {
+  // MAIN FUNCTIONS
   const location = useLocation().pathname;
-
   const dispatch = useDispatch();
 
   return (

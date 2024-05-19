@@ -5,10 +5,13 @@ import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
 
 const CarCard = ({ car }) => {
+  // MAIN FUNCTIONS
   const navigate = useNavigate();
 
+  // LOCAL STATE
   const [cardHover, setCardHOver] = useState(false);
 
+  // OTHER FUNCTIONS
   const formatNumber = (num) => {
     let str = num.toString();
     let arr = str.split("");

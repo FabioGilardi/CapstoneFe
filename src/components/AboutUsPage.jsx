@@ -3,23 +3,24 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import logo from "../assets/images/logo.png";
-import tail from "../assets/images/tail.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getSellers } from "../redux/actions";
 
 const AboutUsPage = () => {
+  // MAIN FUNCTIONS
+  const dispatch = useDispatch();
+
+  // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const sellerList = useSelector((state) => state.userReducer.sellers);
 
-  console.log(sellerList);
-
-  const dispatch = useDispatch();
-
+  // OTHER FUNCTIONS
   const stringManipulation = (string) => {
     return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
   };
 
+  // COMPONENT MOUNT/UPDATE
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getSellers(accessToken));

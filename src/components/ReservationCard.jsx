@@ -10,9 +10,11 @@ import {
 } from "../redux/actions";
 
 const ReservationCard = ({ reservation, modalShow, activeCardId }) => {
-  const accessToken = useSelector((state) => state.authReducer.accessToken);
-
+  // MAIN FUNCTIONS
   const dispatch = useDispatch();
+
+  // GLOBAL STATE
+  const accessToken = useSelector((state) => state.authReducer.accessToken);
 
   return (
     <Col id={reservation.id} className="mb-3">

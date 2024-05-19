@@ -10,13 +10,21 @@ import { useState } from "react";
 import { actionlogin } from "../redux/actions";
 
 const LoginPage = () => {
+  // MAIN FUNCTIONS
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // GLOBAL STATE
+  const loginErrors = useSelector((state) => state.authReducer.loginErrors);
+  const accessToken = useSelector((state) => state.authReducer.accessToken);
+
+  // FORM FEATURES
   const initialForm = {
     email: "",
     password: "",
   };
+
+  const [form, setForm] = useState(initialForm);
 
   const handleChange = (e, attribute) => {
     setForm({
@@ -24,11 +32,6 @@ const LoginPage = () => {
       [attribute]: e.target.value,
     });
   };
-
-  const loginErrors = useSelector((state) => state.authReducer.loginErrors);
-  const accessToken = useSelector((state) => state.authReducer.accessToken);
-
-  const [form, setForm] = useState(initialForm);
 
   return (
     <Container className="h-100">

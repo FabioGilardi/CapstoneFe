@@ -16,19 +16,12 @@ import {
 } from "../redux/actions";
 
 const SingleCar = () => {
+  // MAIN FUNCTIONS
   const param = useParams().id;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const initialDateForm = {
-    date: "",
-    time: "",
-  };
-
-  const initialFetchForm = {
-    reservationDate: "",
-    sellerId: "",
-    carId: Number(param),
-  };
-
+  // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
   const singleCar = useSelector((state) => state.carReducer.singleCar);
   const sellerList = useSelector((state) => state.userReducer.sellers);
@@ -39,17 +32,37 @@ const SingleCar = () => {
     (state) => state.reservationReducer.addReservationHasErrors
   );
 
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
-
+  // LOCAL STATE
   const [baseData, setBaseData] = useState(true);
   const [consumption, setConsumption] = useState(false);
   const [aesthetic, setAesthetic] = useState(false);
   const [accessories, setAccessories] = useState(false);
-  const [fetchForm, setFetchForm] = useState(initialFetchForm);
+
+  // DATE FORM FEATURES
+  const initialDateForm = {
+    date: "",
+    time: "",
+  };
+
   const [dateForm, setDateForm] = useState(initialDateForm);
 
+  const handleDateForm = (e, attribute) => {
+    setDateForm({
+      ...dateForm,
+      [attribute]: e.target.value,
+    });
+  };
+
+  // FETCH FORM FEATURES
+  const initialFetchForm = {
+    reservationDate: "",
+    sellerId: "",
+    carId: Number(param),
+  };
+
+  const [fetchForm, setFetchForm] = useState(initialFetchForm);
+
+  // OTHER FUNCTIONS
   const handleBaseData = () => {
     setBaseData(true);
     setConsumption(false);
@@ -73,13 +86,6 @@ const SingleCar = () => {
     setConsumption(false);
     setAesthetic(false);
     setAccessories(true);
-  };
-
-  const handleDateForm = (e, attribute) => {
-    setDateForm({
-      ...dateForm,
-      [attribute]: e.target.value,
-    });
   };
 
   const stringManipulation = (string) => {
@@ -112,6 +118,7 @@ const SingleCar = () => {
     return result;
   };
 
+  // COMPONENT MOUNT/UPDATE
   useEffect(() => {
     setFetchForm({
       ...fetchForm,

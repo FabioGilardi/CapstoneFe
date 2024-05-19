@@ -10,14 +10,16 @@ import { REGISTER_IS_OK, actionRegister } from "../redux/actions";
 import { Link } from "react-router-dom";
 
 const RegisterPage = () => {
+  // MAIN FUNCTIONS
   const dispatch = useDispatch();
 
+  // GLOBAL STATE
   const registrationErrors = useSelector(
     (state) => state.authReducer.registerErrors
   );
-
   const isRegisterOk = useSelector((state) => state.authReducer.registerIsOk);
 
+  // FORM FEATURES
   const initialForm = {
     username: "",
     email: "",
@@ -27,6 +29,8 @@ const RegisterPage = () => {
     birthDate: "",
   };
 
+  const [form, setForm] = useState(initialForm);
+
   const handleChange = (e, attribute) => {
     setForm({
       ...form,
@@ -34,6 +38,7 @@ const RegisterPage = () => {
     });
   };
 
+  // COMPONENT MOUNT/UPDATE
   useEffect(() => {
     dispatch({
       type: REGISTER_IS_OK,
@@ -41,8 +46,6 @@ const RegisterPage = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const [form, setForm] = useState(initialForm);
 
   return (
     <Container className="my-4">
