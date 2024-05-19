@@ -147,33 +147,34 @@ const AboutUsPage = () => {
           <h4 className="text-primary fw-bold text-center mb-4">OUR TEAM</h4>
           <Col xs={11} md={10} lg={8}>
             <Row className="justify-content-center">
-              {sellerList.map((seller) => {
-                return (
-                  <Col
-                    key={seller.id}
-                    id={seller.id}
-                    xs={5}
-                    md={3}
-                    className="d-flex justify-content-md-center justify-content-start mb-3 mt-md-3"
-                  >
-                    <Card className="shadow w-100">
-                      <Card.Img
-                        variant="center"
-                        src={seller.avatar}
-                        className="rounded-top"
-                        style={{ objectFit: "fill" }}
-                      />
-                      <Card.Body>
-                        <Card.Text className="text-center">
-                          {stringManipulation(seller.name) +
-                            " " +
-                            stringManipulation(seller.surname)}
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                );
-              })}
+              {sellerList !== null &&
+                sellerList.map((seller) => {
+                  return (
+                    <Col
+                      key={seller.id}
+                      id={seller.id}
+                      xs={5}
+                      md={3}
+                      className="d-flex justify-content-md-center justify-content-start mb-3 mt-md-3"
+                    >
+                      <Card className="shadow w-100">
+                        <Card.Img
+                          variant="center"
+                          src={seller.avatar}
+                          className="rounded-top"
+                          style={{ objectFit: "fill" }}
+                        />
+                        <Card.Body>
+                          <Card.Text className="text-center">
+                            {stringManipulation(seller.name) +
+                              " " +
+                              stringManipulation(seller.surname)}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  );
+                })}
             </Row>
           </Col>
         </Row>
