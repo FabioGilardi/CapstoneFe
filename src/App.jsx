@@ -10,6 +10,7 @@ import CollectionPage from "./components/CollectionPage";
 import SingleCar from "./components/SingleCar";
 import HomePage from "./components/HomePage";
 import AboutUsPage from "./components/AboutUsPage";
+import ContactPage from "./components/ContactPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/collection" element={<CollectionPage />} />
             <Route path="/car/:id" element={<SingleCar />} />
             <Route path="/about" element={<AboutUsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
         <CustomFooter />

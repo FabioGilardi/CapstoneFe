@@ -64,6 +64,14 @@ const HomePage = () => {
 
   return (
     <>
+      <div className="back-to-top shadow-lg">
+        <a href="#top">
+          <i
+            className="bi bi-chevron-up fs-2 rounded-2 p-2 border border-primary"
+            style={{ backgroundColor: "#FFEFE5" }}
+          ></i>
+        </a>
+      </div>
       <Container fluid className="hero">
         <Row className="h-100">
           <Col
@@ -289,6 +297,59 @@ const HomePage = () => {
                 FIND OUT MORE <i className="bi bi-chevron-right"></i>
               </Button>
             </div>
+          </Col>
+        </Row>
+      </Container>
+      <Container className="py-5">
+        <Row className="justify-content-center">
+          <h1 className="text-center fw-bold">Contact Us</h1>
+          <Col xs={11} md={10} lg={8}>
+            <Row className="py-4">
+              <Col xs={12} lg={8} className="order-1">
+                <h4 className="fw-bold">Why Choose Us?</h4>
+                <ul>
+                  <li>
+                    <span className="text-primary fw-bold">Wide Selection</span>
+                    : You&apos;ll find cars of all makes and models.
+                  </li>
+                  <li>
+                    <span className="text-primary fw-bold">
+                      Personalized Financing
+                    </span>
+                    : Flexible financing solutions for every budget.
+                  </li>
+                  <li>
+                    <span className="text-primary fw-bold">
+                      After-Sales Service
+                    </span>
+                    : Dedicated customer service to ensure your long-term
+                    satisfaction.
+                  </li>
+                </ul>
+              </Col>
+              <Col
+                xs={12}
+                lg={4}
+                className="d-flex justify-content-center align-items-center order-0 order-lg-1 mb-3 mb-lg-0"
+              >
+                <img
+                  src="https://www.automobile.it/_next/static/media/manifesto.ba67c081.svg"
+                  width="150px"
+                ></img>
+              </Col>
+              <div className="order-2 d-flex justify-content-center mt-3">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="text-white rounded-pill px-4"
+                  onClick={() => {
+                    navigate("/contact");
+                  }}
+                >
+                  MORE INFO <i className="bi bi-chevron-right"></i>
+                </Button>
+              </div>
+            </Row>
           </Col>
         </Row>
       </Container>

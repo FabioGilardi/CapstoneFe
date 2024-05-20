@@ -29,11 +29,23 @@ const AboutUsPage = () => {
 
   return (
     <>
+      <div className="back-to-top shadow-lg">
+        <a href="#top">
+          <i
+            className="bi bi-chevron-up fs-2 rounded-2 p-2 border border-primary"
+            style={{ backgroundColor: "#FFEFE5" }}
+          ></i>
+        </a>
+      </div>
+      <Container fluid className="py-4" style={{ backgroundColor: "#FFEFE5" }}>
+        <h2 className="fw-bold mb-0 text-center text-primary">
+          <i className="bi bi-search text-primary"></i> ABOUT US
+        </h2>
+      </Container>
       <Container fluid className="py-5">
         <Row className="justify-content-center">
-          <h2 className="fw-bold text-center mb-0">ABOUT US</h2>
           <Col xs={11} md={10} lg={8}>
-            <Row className="mt-5 justify-content-center">
+            <Row className="justify-content-center">
               <Col xs={10} lg={6}>
                 <img
                   alt="logo"

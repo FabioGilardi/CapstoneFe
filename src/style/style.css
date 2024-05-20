@@ -83,6 +83,12 @@ body,
   background-position-y: 20%;
 }
 
+.back-to-top {
+  position: fixed;
+  right: 0.2%;
+  bottom: 0.5%;
+}
+
 /*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
  * Copyright 2011-2024 The Bootstrap Authors
