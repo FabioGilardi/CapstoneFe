@@ -134,14 +134,11 @@ export const getUserMe = (accessToken) => {
   };
 };
 
-export const getSellers = (accessToken) => {
+export const getSellers = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(baseUrl + "/users/sellers", {
+      const response = await fetch(baseUrl + "/public/sellers", {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       });
       if (response.ok) {
         const data = await response.json();
@@ -355,14 +352,11 @@ export const saveReview = (accessToken) => {
   };
 };
 
-export const saveAllUsersReview = (accessToken) => {
+export const saveAllUsersReview = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(baseUrl + "/reviews", {
+      const response = await fetch(baseUrl + "/public/reviews", {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       });
       if (response.ok) {
         const data = await response.json();
@@ -445,18 +439,15 @@ export const postNewReview = (accessToken, payload) => {
 
 // CAR REDUCER
 
-export const saveCars = (accessToken) => {
+export const saveCars = () => {
   return async (dispatch) => {
     dispatch({
       type: CAR_IS_LOADING,
       payload: true,
     });
     try {
-      const response = await fetch(baseUrl + "/cars", {
+      const response = await fetch(baseUrl + "/public/cars", {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       });
       if (response.ok) {
         const data = await response.json();
@@ -476,14 +467,11 @@ export const saveCars = (accessToken) => {
   };
 };
 
-export const saveSingleCar = (accessToken, id) => {
+export const saveSingleCar = (id) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(baseUrl + "/cars/" + id, {
+      const response = await fetch(baseUrl + "/public/cars/" + id, {
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       });
       if (response.ok) {
         const data = await response.json();

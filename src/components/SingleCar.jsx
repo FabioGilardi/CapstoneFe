@@ -124,12 +124,13 @@ const SingleCar = () => {
       ...fetchForm,
       reservationDate: dateForm.date + dateForm.time,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateForm]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(saveSingleCar(accessToken, param));
-    dispatch(getSellers(accessToken));
+    dispatch(saveSingleCar(param));
+    dispatch(getSellers());
     dispatch({
       type: ADD_RESERVATION_IS_OK,
       payload: false,
@@ -462,6 +463,11 @@ const SingleCar = () => {
               )}
             </Row>
             <h4 className="fw-bold mt-5 mb-4">BOOK A MEETING</h4>
+            {accessToken === "" && (
+              <p className="fst-italic text-primary">
+                You must be logged to proceed
+              </p>
+            )}
             {sellerList !== null && (
               <Row>
                 <Col xs={12} xl={8}>
@@ -490,7 +496,7 @@ const SingleCar = () => {
                       {addReservationHasErrors}
                     </Alert>
                   )}
-                  {!addReservationIsOK && (
+                  {!addReservationIsOK && accessToken !== "" && (
                     <Form
                       id="reservationForm"
                       onSubmit={(e) => {

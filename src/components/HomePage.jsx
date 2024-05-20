@@ -51,14 +51,14 @@ const HomePage = () => {
 
   const handleClose2 = () => {
     setShow2(false);
-    dispatch(saveAllUsersReview(accessToken));
+    dispatch(saveAllUsersReview());
   };
 
   const handleShow2 = () => setShow2(true);
 
   // COMPONENT MOUNT/UPDATE
   useEffect(() => {
-    dispatch(saveAllUsersReview(accessToken));
+    dispatch(saveAllUsersReview());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -276,16 +276,18 @@ const HomePage = () => {
               </Row>
             )}
             <div className="text-center d-flex flex-column flex-sm-row justify-content-around">
-              <Button
-                variant="primary"
-                size="lg"
-                className="text-white rounded-pill px-4 mb-3 mb-sm-0"
-                onClick={() => {
-                  handleShow2();
-                }}
-              >
-                ADD A REVIEW <i className="bi bi-plus-lg"></i>
-              </Button>
+              {accessToken !== "" && (
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="text-white rounded-pill px-4 mb-3 mb-sm-0"
+                  onClick={() => {
+                    handleShow2();
+                  }}
+                >
+                  ADD A REVIEW <i className="bi bi-plus-lg"></i>
+                </Button>
+              )}
               <Button
                 variant="primary"
                 size="lg"

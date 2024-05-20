@@ -35,17 +35,17 @@ const CustomNavbar = () => {
               }
               to="/"
             >
-              Home
+              HOME
             </Link>
             <Link
               className={
-                location === "/collection"
+                location === "/collection" || location.includes("/car/")
                   ? "nav-link active hover"
                   : "nav-link hover"
               }
               to="/collection"
             >
-              Our Collection
+              OUR COLLECTION
             </Link>
             <Link
               className={
@@ -55,7 +55,7 @@ const CustomNavbar = () => {
               }
               to="/about"
             >
-              About Us
+              ABOUT US
             </Link>
             <Link
               className={
@@ -65,7 +65,7 @@ const CustomNavbar = () => {
               }
               to="/contact"
             >
-              Contact Us
+              CONTACT US
             </Link>
           </Nav>
           <Nav>
@@ -80,7 +80,7 @@ const CustomNavbar = () => {
               to={accessToken !== "" ? "/profile" : "/login"}
             >
               <i className="bi bi-person-circle"></i>
-              {accessToken !== "" ? " My Profile" : " Login"}
+              {accessToken !== "" ? " MY PROFILE" : " LOGIN"}
             </Link>
           </Nav>
         </Navbar.Collapse>

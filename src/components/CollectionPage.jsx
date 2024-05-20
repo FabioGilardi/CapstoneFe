@@ -13,14 +13,14 @@ const CollectionPage = () => {
   const dispatch = useDispatch();
 
   // GLOBAL STATE
-  const accessToken = useSelector((state) => state.authReducer.accessToken);
+  // const accessToken = useSelector((state) => state.authReducer.accessToken);
   const carList = useSelector((state) => state.carReducer.cars);
   const isLoadingCars = useSelector((state) => state.carReducer.isLoadingCars);
 
   // COMPONENT MOUNT/UPDATE
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(saveCars(accessToken));
+    dispatch(saveCars());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
