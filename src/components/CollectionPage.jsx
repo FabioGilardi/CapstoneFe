@@ -43,7 +43,7 @@ const CollectionPage = () => {
         <Row className="justify-content-evenly">
           <Col xs={10} sm={11} lg={12}>
             <Row className="justify-content-center">
-              <Col lg={8}>
+              <Col lg={8} className="order-1 order-lg-0">
                 <p className="pt-4">
                   <span className="text-primary fw-bold">
                     German automobiles{" "}
@@ -85,7 +85,7 @@ const CollectionPage = () => {
               <Col
                 xs={8}
                 lg={4}
-                className="d-flex align-items-center justify-content-center mt-3 mt-lg-0"
+                className="d-flex align-items-center justify-content-center mt-3 mt-lg-0 order-0 order-lg-1"
               >
                 <img src={quality} width="55%" className="rounded-circle"></img>
               </Col>

@@ -97,5 +97,9 @@ body,
   bottom: 0.5%;
 }
 
+.navbar .nav-link.active {
+  color: #ff6600 !important;
+}
+
 // Import BS
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
