@@ -11,6 +11,7 @@ import SingleCar from "./components/SingleCar";
 import HomePage from "./components/HomePage";
 import AboutUsPage from "./components/AboutUsPage";
 import ContactPage from "./components/ContactPage";
+import Page404 from "./components/Page404";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <CustomNavbar />
         <main className="flex-grow-1">
           <Routes>
+            <Route path="/*" element={<Page404 />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
