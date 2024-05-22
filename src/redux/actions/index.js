@@ -28,6 +28,9 @@ export const ADD_RESERVATION_HAS_ERRORS = "ADD_RESERVATION_HAS_ERRORS";
 export const SAVE_ALL_USERS_REVIEWS = "SAVE_ALL_USERS_REVIEWS";
 export const NEW_REVIEW_IS_OK = "NEW_REVIEW_IS_OK";
 export const NEW_REVIEW_HAS_ERRORS = "NEW_REVIEW_HAS_ERRORS";
+export const DELETE_USER_ROLE = "DELETE_USER_ROLE";
+export const ADD_CAR_IS_OK = "ADD_CAR_IS_OK";
+export const ADD_CAR_ERRORS = "ADD_CAR_ERRORS";
 
 // AUTH REDUCER ACTIONS
 
@@ -478,6 +481,39 @@ export const saveSingleCar = (id) => {
         dispatch({
           type: SAVE_SINGLE_CAR,
           payload: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const addCar = (accessToken, payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(baseUrl + "/cars", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        dispatch({
+          type: ADD_CAR_IS_OK,
+          payload: true,
+        });
+        dispatch({
+          type: ADD_CAR_ERRORS,
+          payload: null,
+        });
+      } else {
+        const data = await response.json();
+        dispatch({
+          type: ADD_CAR_ERRORS,
+          payload: data.message,
         });
       }
     } catch (error) {

@@ -12,6 +12,7 @@ import HomePage from "./components/HomePage";
 import AboutUsPage from "./components/AboutUsPage";
 import ContactPage from "./components/ContactPage";
 import Page404 from "./components/Page404";
+import SellerPage from "./components/SellerPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/car/:id" element={<SingleCar />} />
             <Route path="/about" element={<AboutUsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/sellerSection" element={<SellerPage />} />
           </Routes>
         </main>
         <CustomFooter />

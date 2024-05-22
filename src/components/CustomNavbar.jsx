@@ -11,6 +11,7 @@ const CustomNavbar = () => {
 
   // GLOBAL STATE
   const accessToken = useSelector((state) => state.authReducer.accessToken);
+  const userRole = useSelector((state) => state.userReducer.userRole);
 
   return (
     <Navbar
@@ -67,6 +68,18 @@ const CustomNavbar = () => {
             >
               CONTACT US
             </Link>
+            {userRole === "SELLER" && (
+              <Link
+                className={
+                  location === "/sellerSection"
+                    ? "nav-link active hover"
+                    : "nav-link hover"
+                }
+                to="/sellerSection"
+              >
+                SELLER SECTION
+              </Link>
+            )}
           </Nav>
           <Nav>
             <Link

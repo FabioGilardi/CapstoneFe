@@ -1,5 +1,6 @@
 import {
   CURRENT_USER_IS_LOADING,
+  DELETE_USER_ROLE,
   PASSWORD_HAS_ERRORS,
   PASSWORD_IS_OK,
   SAVE_CURRENT_USER,
@@ -10,6 +11,7 @@ import {
 
 const initialState = {
   currentUser: {},
+  userRole: "",
   isLoadingCurrentUser: false,
   userPutHasErrors: null,
   userPutIsOk: false,
@@ -24,6 +26,13 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: action.payload,
+        userRole: action.payload.role,
+      };
+
+    case DELETE_USER_ROLE:
+      return {
+        ...state,
+        userRole: "",
       };
 
     case CURRENT_USER_IS_LOADING:

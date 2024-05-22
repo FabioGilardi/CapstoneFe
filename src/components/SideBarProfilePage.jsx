@@ -1,7 +1,7 @@
 import Col from "react-bootstrap/Col";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { SAVE_ACCESS_TOKEN } from "../redux/actions";
+import { DELETE_USER_ROLE, SAVE_ACCESS_TOKEN } from "../redux/actions";
 
 // eslint-disable-next-line react/prop-types
 const SideBarProfilePage = ({ imgSrc, username }) => {
@@ -53,6 +53,9 @@ const SideBarProfilePage = ({ imgSrc, username }) => {
               dispatch({
                 type: SAVE_ACCESS_TOKEN,
                 payload: "",
+              });
+              dispatch({
+                type: DELETE_USER_ROLE,
               });
             }}
           >

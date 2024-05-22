@@ -152,7 +152,7 @@ const ProfilePage = () => {
   return (
     <Container className={isLoadingCurrentUser ? "py-3 h-100" : "py-3"}>
       {isLoadingCurrentUser && <LoadingSpinner />}
-      {!isLoadingCurrentUser && (
+      {currentUser !== null && (
         <Row className="justify-content-center my-md-5">
           <Col xs={12} md={12} lg={8}>
             <Row className="justify-content-center position-relative">
