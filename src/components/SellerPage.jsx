@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_CAR_ERRORS, ADD_CAR_IS_OK, addCar } from "../redux/actions";
@@ -275,162 +276,163 @@ const SellerPage = () => {
                 <option value="YELLOW">Yellow</option>
               </Form.Select>
             </Form.Group>
-            <Row>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("1")}
-                className={
-                  carForm.accessoryIdList.includes("1")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Alloy Wheels
+            <p className="mt-4 mb-0">ACCESSORIES:</p>
+            <Row className="g-3">
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("1")}
+                  className={
+                    carForm.accessoryIdList.includes("1")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Alloy Wheels
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("2")}
-                className={
-                  carForm.accessoryIdList.includes("2")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Sport Setup
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("2")}
+                  className={
+                    carForm.accessoryIdList.includes("2")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Sport Setup
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("3")}
-                className={
-                  carForm.accessoryIdList.includes("3")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Electric Seats
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("3")}
+                  className={
+                    carForm.accessoryIdList.includes("3")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Electric Seats
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("4")}
-                className={
-                  carForm.accessoryIdList.includes("4")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Dual Zone Air Conditioning
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("4")}
+                  className={
+                    carForm.accessoryIdList.includes("4")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Dual Zone Air Conditioning
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("5")}
-                className={
-                  carForm.accessoryIdList.includes("5")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Panoramic Roof
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("5")}
+                  className={
+                    carForm.accessoryIdList.includes("5")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Panoramic Roof
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("6")}
-                className={
-                  carForm.accessoryIdList.includes("6")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Assisted Parking
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("6")}
+                  className={
+                    carForm.accessoryIdList.includes("6")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Assisted Parking
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("7")}
-                className={
-                  carForm.accessoryIdList.includes("7")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Dashcam
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("7")}
+                  className={
+                    carForm.accessoryIdList.includes("7")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Dashcam
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("8")}
-                className={
-                  carForm.accessoryIdList.includes("8")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Sensors
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("8")}
+                  className={
+                    carForm.accessoryIdList.includes("8")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Sensors
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("9")}
-                className={
-                  carForm.accessoryIdList.includes("9")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Cruise Control
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("9")}
+                  className={
+                    carForm.accessoryIdList.includes("9")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Cruise Control
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("10")}
-                className={
-                  carForm.accessoryIdList.includes("10")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Runflat Tyres
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("10")}
+                  className={
+                    carForm.accessoryIdList.includes("10")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Runflat Tyres
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("11")}
-                className={
-                  carForm.accessoryIdList.includes("11")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Spare Wheel
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("11")}
+                  className={
+                    carForm.accessoryIdList.includes("11")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Spare Wheel
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("12")}
-                className={
-                  carForm.accessoryIdList.includes("12")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Emergency Kit
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("12")}
+                  className={
+                    carForm.accessoryIdList.includes("12")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Emergency Kit
+                </div>
               </Col>
-              <Col
-                xs={6}
-                lg={3}
-                onClick={() => handleAccessoryClick("13")}
-                className={
-                  carForm.accessoryIdList.includes("13")
-                    ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                    : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3"
-                }
-              >
-                Full Led Headlights
+              <Col xs={6} lg={3}>
+                <div
+                  onClick={() => handleAccessoryClick("13")}
+                  className={
+                    carForm.accessoryIdList.includes("13")
+                      ? "border border-primary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                      : "border border-secondary rounded-2 d-flex justify-content-center align-items-center star my-3 text-center h-100"
+                  }
+                >
+                  Full Led Headlights
+                </div>
               </Col>
             </Row>
             {addCarErrors !== null && (
@@ -449,7 +451,7 @@ const SellerPage = () => {
                 </div>
               </Alert>
             )}
-            <div className="d-flex justify-content-evenly my-4">
+            <div className="d-flex justify-content-evenly my-5">
               <Button variant="primary" className="text-white" type="submit">
                 ADD <i className="bi bi-plus-lg"></i>
               </Button>
