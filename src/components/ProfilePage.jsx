@@ -150,299 +150,311 @@ const ProfilePage = () => {
   }, [resForm]);
 
   return (
-    <Container className={isLoadingCurrentUser ? "py-3 h-100" : "py-3"}>
-      {isLoadingCurrentUser && <LoadingSpinner />}
-      {currentUser !== null && (
-        <Row className="justify-content-center my-md-5">
-          <Col xs={12} md={12} lg={8}>
-            <Row className="justify-content-center position-relative">
-              <SideBarProfilePage
-                imgSrc={currentUser.avatar}
-                username={currentUser.username}
-              />
-              <Col xs={12} md={9} className="ps-4">
-                <h4 className="fw-bold">MY PROFILE</h4>
-                <p>
-                  Here you can see all the information provided during
-                  registration. If you made any mistakes you can always change
-                  them later.
-                </p>
-                <ul className="list-unstyled">
-                  <li>
-                    <span className="text-primary">First Name:</span>{" "}
-                    {currentUser.name}
-                  </li>
-                  <li className="mt-4">
-                    <span className="text-primary">Last Name:</span>{" "}
-                    {currentUser.surname}
-                  </li>
-                  <li className="mt-4">
-                    <span className="text-primary">Email:</span>{" "}
-                    {currentUser.email}
-                  </li>
-                  <li className="mt-4">
-                    <span className="text-primary">Birthday:</span>{" "}
-                    {currentUser.birthDate}
-                  </li>
-                </ul>
-                <div className="text-center border-bottom border-tertiary border-2 pb-5 mt-2">
-                  <Button
-                    variant="primary"
-                    className="text-white rounded-pill w-50 fw-bold"
-                    onClick={() => {
-                      navigate("/profileUpdate");
-                    }}
-                  >
-                    UPDATE
-                  </Button>
-                </div>
-                <div className="border-bottom border-tertiary border-2 pb-5 mt-2">
-                  <h4 className="fw-bold mt-5">MY BOOKINGS</h4>
-                  <p>Here you can find all bookings with sellers.</p>
+    <>
+      <div className="back-to-top shadow-lg">
+        <a href="#top">
+          <i
+            className="bi bi-chevron-up fs-2 rounded-2 p-2 border border-primary"
+            style={{ backgroundColor: "#FFEFE5" }}
+          ></i>
+        </a>
+      </div>
+      <Container className={isLoadingCurrentUser ? "py-3 h-100" : "py-3"}>
+        {isLoadingCurrentUser && <LoadingSpinner />}
+        {currentUser !== null && (
+          <Row className="justify-content-center my-md-5">
+            <Col xs={12} md={12} lg={8}>
+              <Row className="justify-content-center position-relative">
+                <SideBarProfilePage
+                  imgSrc={currentUser.avatar}
+                  username={currentUser.username}
+                />
+                <Col xs={12} md={9} className="ps-4">
+                  <h4 className="fw-bold">MY PROFILE</h4>
                   <p>
-                    Feel free to change the day and time of a reservation or
-                    cancel it, after all we know that unexpected events are
-                    always around the corner.
+                    Here you can see all the information provided during
+                    registration. If you made any mistakes you can always change
+                    them later.
                   </p>
-                  <p>
-                    If you need to contact one of our sellers directly,
-                    don&apos;t hesitate, we are always at your disposal.
-                  </p>
-                  {reservationList.length === 0 && (
-                    <p className="fst-italic text-center text-primary">
-                      There are no reservations yet
+                  <ul className="list-unstyled">
+                    <li>
+                      <span className="text-primary">First Name:</span>{" "}
+                      {currentUser.name}
+                    </li>
+                    <li className="mt-4">
+                      <span className="text-primary">Last Name:</span>{" "}
+                      {currentUser.surname}
+                    </li>
+                    <li className="mt-4">
+                      <span className="text-primary">Email:</span>{" "}
+                      {currentUser.email}
+                    </li>
+                    <li className="mt-4">
+                      <span className="text-primary">Birthday:</span>{" "}
+                      {currentUser.birthDate}
+                    </li>
+                  </ul>
+                  <div className="text-center border-bottom border-tertiary border-2 pb-5 mt-2">
+                    <Button
+                      variant="primary"
+                      className="text-white rounded-pill w-50 fw-bold"
+                      onClick={() => {
+                        navigate("/profileUpdate");
+                      }}
+                    >
+                      UPDATE
+                    </Button>
+                  </div>
+                  <div className="border-bottom border-tertiary border-2 pb-5 mt-2">
+                    <h4 className="fw-bold mt-5">MY BOOKINGS</h4>
+                    <p>Here you can find all bookings with sellers.</p>
+                    <p>
+                      Feel free to change the day and time of a reservation or
+                      cancel it, after all we know that unexpected events are
+                      always around the corner.
                     </p>
-                  )}
-                  {!isLoadingReservation && (
-                    <Row xs={1} md={2}>
-                      {reservationList.map((reservation) => {
-                        return (
-                          <ReservationCard
-                            key={reservation.id}
-                            reservation={reservation}
-                            modalShow={handleShow}
-                            activeCardId={setActiveCardId}
-                          />
-                        );
-                      })}
-                    </Row>
-                  )}
-                </div>
-                <div>
-                  <h4 className="fw-bold mt-5">MY REVIEWS</h4>
-                  <p>
-                    Here you can find all the reviews you have written about our
-                    service.
-                  </p>
-                  <p>
-                    Remember that your opinion is important as it allows us to
-                    continuously improve.
-                  </p>
-                  {reviewList.length === 0 && (
-                    <p className="fst-italic text-center text-primary">
-                      There are no reviews yet
+                    <p>
+                      If you need to contact one of our sellers directly,
+                      don&apos;t hesitate, we are always at your disposal.
                     </p>
-                  )}
-                  {!reviewIsLoading && (
-                    <Row xs={1} md={2}>
-                      {reviewList.map((review) => {
-                        return (
-                          <ReviewCard
-                            key={review.id}
-                            review={review}
-                            modalShow={handleShow2}
-                            activeCardId={setActiveCardId}
-                          />
-                        );
-                      })}
-                    </Row>
-                  )}
-                </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      )}
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Change Reservation Date And Time</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {reservationUpdateIsOk === true && (
-            <>
-              <Alert
-                variant="success"
-                className="d-flex justify-content-between align-items-center"
+                    {reservationList.length === 0 && (
+                      <p className="fst-italic text-center text-primary">
+                        There are no reservations yet
+                      </p>
+                    )}
+                    {!isLoadingReservation && (
+                      <Row xs={1} md={2}>
+                        {reservationList.map((reservation) => {
+                          return (
+                            <ReservationCard
+                              key={reservation.id}
+                              reservation={reservation}
+                              modalShow={handleShow}
+                              activeCardId={setActiveCardId}
+                            />
+                          );
+                        })}
+                      </Row>
+                    )}
+                  </div>
+                  <div>
+                    <h4 className="fw-bold mt-5">MY REVIEWS</h4>
+                    <p>
+                      Here you can find all the reviews you have written about
+                      our service.
+                    </p>
+                    <p>
+                      Remember that your opinion is important as it allows us to
+                      continuously improve.
+                    </p>
+                    {reviewList.length === 0 && (
+                      <p className="fst-italic text-center text-primary">
+                        There are no reviews yet
+                      </p>
+                    )}
+                    {!reviewIsLoading && (
+                      <Row xs={1} md={2}>
+                        {reviewList.map((review) => {
+                          return (
+                            <ReviewCard
+                              key={review.id}
+                              review={review}
+                              modalShow={handleShow2}
+                              activeCardId={setActiveCardId}
+                            />
+                          );
+                        })}
+                      </Row>
+                    )}
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        )}
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Change Reservation Date And Time</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {reservationUpdateIsOk === true && (
+              <>
+                <Alert
+                  variant="success"
+                  className="d-flex justify-content-between align-items-center"
+                >
+                  <i className="bi bi-check-circle fs-2"></i> Your reservation
+                  has been changed successfully
+                </Alert>
+              </>
+            )}
+            {reservationUpdateIsOk === false &&
+              reservationUpdateHasErrors !== null && (
+                <Alert variant="danger">
+                  <i className="bi bi-exclamation-triangle"></i>{" "}
+                  {reservationUpdateHasErrors}
+                </Alert>
+              )}
+            <Form
+              id="fetchForm"
+              onSubmit={(e) => {
+                e.preventDefault();
+                dispatch(
+                  updateReservation(accessToken, fetchForm, activeCardId)
+                );
+                setResForm(initialResForm);
+              }}
+            >
+              <Form.Group className="mb-3">
+                <Form.Label className="text-black ms-3 opacity-75 fw-bold">
+                  DATE
+                </Form.Label>
+                <Form.Control
+                  className="border rounded-pill border-primary"
+                  type="date"
+                  placeholder="DATE"
+                  value={resForm.date}
+                  required
+                  onChange={(e) => {
+                    handleResForm(e, "date");
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label className="text-black ms-3 opacity-75 fw-bold">
+                  TIME
+                </Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  className="border rounded-pill border-primary"
+                  required
+                  onChange={(e) => {
+                    handleResForm(e, "time");
+                  }}
+                >
+                  <option></option>
+                  <option value="T9:00:00.000">9.00</option>
+                  <option value="T10:00:00.000">10.00</option>
+                  <option value="T11:00:00.000">11.00</option>
+                  <option value="T12:00:00.000">12.00</option>
+                  <option value="T13:00:00.000">13.00</option>
+                  <option value="T14:00:00.000">14.00</option>
+                  <option value="T15:00:00.000">15.00</option>
+                  <option value="T16:00:00.000">16.00</option>
+                  <option value="T17:00:00.000">17.00</option>
+                  <option value="T18:00:00.000">18.00</option>
+                </Form.Select>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            {!reservationUpdateIsOk && (
+              <Button
+                variant="primary"
+                className="text-white"
+                type="submit"
+                form="fetchForm"
               >
-                <i className="bi bi-check-circle fs-2"></i> Your reservation has
-                been changed successfully
-              </Alert>
-            </>
-          )}
-          {reservationUpdateIsOk === false &&
-            reservationUpdateHasErrors !== null && (
+                Save Changes
+              </Button>
+            )}
+          </Modal.Footer>
+        </Modal>
+        <Modal show={show2} onHide={handleClose2}>
+          <Modal.Header closeButton>
+            <Modal.Title>Change Review</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {reviewUpdateIsOk === true && (
+              <>
+                <Alert
+                  variant="success"
+                  className="d-flex justify-content-between align-items-center"
+                >
+                  <i className="bi bi-check-circle fs-2"></i> Your reservation
+                  has been changed successfully
+                </Alert>
+              </>
+            )}
+            {reviewUpdateIsOk === false && reviewUpdateHasErrors !== null && (
               <Alert variant="danger">
                 <i className="bi bi-exclamation-triangle"></i>{" "}
-                {reservationUpdateHasErrors}
+                {reviewUpdateHasErrors}
               </Alert>
             )}
-          <Form
-            id="fetchForm"
-            onSubmit={(e) => {
-              e.preventDefault();
-              dispatch(updateReservation(accessToken, fetchForm, activeCardId));
-              setResForm(initialResForm);
-            }}
-          >
-            <Form.Group className="mb-3">
-              <Form.Label className="text-black ms-3 opacity-75 fw-bold">
-                DATE
-              </Form.Label>
-              <Form.Control
-                className="border rounded-pill border-primary"
-                type="date"
-                placeholder="DATE"
-                value={resForm.date}
-                required
-                onChange={(e) => {
-                  handleResForm(e, "date");
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label className="text-black ms-3 opacity-75 fw-bold">
-                TIME
-              </Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                className="border rounded-pill border-primary"
-                required
-                onChange={(e) => {
-                  handleResForm(e, "time");
-                }}
-              >
-                <option></option>
-                <option value="T9:00:00.000">9.00</option>
-                <option value="T10:00:00.000">10.00</option>
-                <option value="T11:00:00.000">11.00</option>
-                <option value="T12:00:00.000">12.00</option>
-                <option value="T13:00:00.000">13.00</option>
-                <option value="T14:00:00.000">14.00</option>
-                <option value="T15:00:00.000">15.00</option>
-                <option value="T16:00:00.000">16.00</option>
-                <option value="T17:00:00.000">17.00</option>
-                <option value="T18:00:00.000">18.00</option>
-              </Form.Select>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          {!reservationUpdateIsOk && (
-            <Button
-              variant="primary"
-              className="text-white"
-              type="submit"
-              form="fetchForm"
+            <Form
+              id="revForm"
+              onSubmit={(e) => {
+                e.preventDefault();
+                dispatch(updateReview(accessToken, revForm, activeCardId));
+                setRevForm(initialRevForm);
+              }}
             >
-              Save Changes
-            </Button>
-          )}
-        </Modal.Footer>
-      </Modal>
-      <Modal show={show2} onHide={handleClose2}>
-        <Modal.Header closeButton>
-          <Modal.Title>Change Review</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {reviewUpdateIsOk === true && (
-            <>
-              <Alert
-                variant="success"
-                className="d-flex justify-content-between align-items-center"
-              >
-                <i className="bi bi-check-circle fs-2"></i> Your reservation has
-                been changed successfully
-              </Alert>
-            </>
-          )}
-          {reviewUpdateIsOk === false && reviewUpdateHasErrors !== null && (
-            <Alert variant="danger">
-              <i className="bi bi-exclamation-triangle"></i>{" "}
-              {reviewUpdateHasErrors}
-            </Alert>
-          )}
-          <Form
-            id="revForm"
-            onSubmit={(e) => {
-              e.preventDefault();
-              dispatch(updateReview(accessToken, revForm, activeCardId));
-              setRevForm(initialRevForm);
-            }}
-          >
-            <Form.Group className="mb-3">
-              <Form.Control
-                className="border rounded-pill border-primary"
-                type="text"
-                placeholder="TITLE"
-                value={revForm.title}
-                required
-                onChange={(e) => {
-                  handleRevForm(e, "title");
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Control
-                className="border rounded-pill border-primary"
-                type="text"
-                placeholder="DESCRIPTION"
-                value={revForm.description}
-                required
-                onChange={(e) => {
-                  handleRevForm(e, "description");
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              {[1, 2, 3, 4, 5].map((value) => (
-                <i
-                  key={value}
-                  onClick={() => {
-                    setRevForm({
-                      ...revForm,
-                      rating: value,
-                    });
+              <Form.Group className="mb-3">
+                <Form.Control
+                  className="border rounded-pill border-primary"
+                  type="text"
+                  placeholder="TITLE"
+                  value={revForm.title}
+                  required
+                  onChange={(e) => {
+                    handleRevForm(e, "title");
                   }}
-                  className={
-                    value <= revForm.rating
-                      ? "bi bi-star-fill text-warning ms-2 fs-4 star"
-                      : "bi bi-star text-warning ms-2 fs-4 star"
-                  }
-                ></i>
-              ))}
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose2}>
-            Close
-          </Button>
-          {!reviewUpdateIsOk && (
-            <Button
-              variant="primary"
-              className="text-white"
-              type="submit"
-              form="revForm"
-            >
-              Save Changes
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  className="border rounded-pill border-primary"
+                  type="text"
+                  placeholder="DESCRIPTION"
+                  value={revForm.description}
+                  required
+                  onChange={(e) => {
+                    handleRevForm(e, "description");
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <i
+                    key={value}
+                    onClick={() => {
+                      setRevForm({
+                        ...revForm,
+                        rating: value,
+                      });
+                    }}
+                    className={
+                      value <= revForm.rating
+                        ? "bi bi-star-fill text-warning ms-2 fs-4 star"
+                        : "bi bi-star text-warning ms-2 fs-4 star"
+                    }
+                  ></i>
+                ))}
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose2}>
+              Close
             </Button>
-          )}
-        </Modal.Footer>
-      </Modal>
-    </Container>
+            {!reviewUpdateIsOk && (
+              <Button
+                variant="primary"
+                className="text-white"
+                type="submit"
+                form="revForm"
+              >
+                Save Changes
+              </Button>
+            )}
+          </Modal.Footer>
+        </Modal>
+      </Container>
+    </>
   );
 };
 
