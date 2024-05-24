@@ -4,7 +4,6 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_CAR_ERRORS, ADD_CAR_IS_OK, addCar } from "../redux/actions";
@@ -70,6 +69,7 @@ const SellerPage = () => {
   //   COMPONENT UPDATE/MOUNT
   useEffect(() => {
     setCarForm(initialCarForm);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addCarIsOk]);
 
   return (
