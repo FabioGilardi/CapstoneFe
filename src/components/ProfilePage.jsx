@@ -119,6 +119,35 @@ const ProfilePage = () => {
 
   const handleShow2 = () => setShow2(true);
 
+  // IMAGE UPLOAD
+
+  const [image, setImage] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("avatar", image);
+    try {
+      const response = await fetch("http://localhost:3001/users/me/image", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData,
+      });
+      if (response.ok) {
+        console.log("upload completed");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setTimeout(() => {
+        dispatch(getUserMe(accessToken));
+        setImage(null);
+      }, "1000");
+    }
+  };
+
   // COMPONENT MOUNT/UPDATE
   useEffect(() => {
     dispatch(getUserMe(accessToken));
@@ -193,11 +222,40 @@ const ProfilePage = () => {
                       <span className="text-primary">Birthday:</span>{" "}
                       {currentUser.birthDate}
                     </li>
+                    <li className="mt-4">
+                      <Form
+                        onSubmit={(e) => {
+                          handleSubmit(e);
+                        }}
+                      >
+                        <Form.Group controlId="formFileSm">
+                          <Form.Label className="text-primary star">
+                            Change Avatar
+                          </Form.Label>
+                          <Form.Control
+                            type="file"
+                            size="sm"
+                            className="d-none"
+                            onChange={(e) => {
+                              setImage(e.target.files[0]);
+                            }}
+                          />
+                          {image !== null && (
+                            <Button
+                              type="submit"
+                              className="ms-3 text-white rounded-pill fw-bold"
+                            >
+                              UPLOAD
+                            </Button>
+                          )}
+                        </Form.Group>
+                      </Form>
+                    </li>
                   </ul>
                   <div className="text-center border-bottom border-tertiary border-2 pb-5 mt-2">
                     <Button
                       variant="primary"
-                      className="text-white rounded-pill w-50 fw-bold"
+                      className="text-white rounded-pill w-50 fw-bold mt-2"
                       onClick={() => {
                         navigate("/profileUpdate");
                       }}
