@@ -10,10 +10,13 @@ const CustomFooter = () => {
         <Col>
           <h5 className="text-secondary text-center mb-0">FOLLOW US</h5>
           <div className="d-flex justify-content-center">
-            <Link to="https://www.linkedin.com/in/fabio-gilardi-599b022a0/">
+            <Link
+              to="https://www.linkedin.com/in/fabio-gilardi-599b022a0/"
+              target="_blank"
+            >
               <i className="bi bi-linkedin linkedin fs-3 me-2"></i>
             </Link>
-            <Link to="https://github.com/FabioGilardi">
+            <Link to="https://github.com/FabioGilardi" target="_blank">
               <i className="bi bi-github github fs-3"></i>
             </Link>
           </div>
