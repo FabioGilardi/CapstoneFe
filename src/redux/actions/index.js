@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = "https://capstonebe-4u2r.onrender.com";
 
 export const SAVE_ACCESS_TOKEN = "SAVE_ACCESS_TOKEN";
 export const REGISTER_IS_OK = "REGISTER_IS_OK";
