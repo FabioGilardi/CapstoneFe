@@ -72,7 +72,7 @@ const ReservationCard = ({ reservation, modalShow, activeCardId }) => {
               onClick={async (e) => {
                 try {
                   const response = await fetch(
-                    `http://localhost:3001/reservations/${
+                    `https://capstonebe-4u2r.onrender.com/reservations/${
                       e.target.closest(".col").id
                     }`,
                     {

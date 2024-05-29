@@ -75,7 +75,7 @@ const ReviewCard = ({ review, modalShow, activeCardId }) => {
                 onClick={async (e) => {
                   try {
                     const response = await fetch(
-                      `http://localhost:3001/reviews/${
+                      `https://capstonebe-4u2r.onrender.com/reviews/${
                         e.target.closest(".col").id
                       }`,
                       {
