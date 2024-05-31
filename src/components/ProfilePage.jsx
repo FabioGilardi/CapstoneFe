@@ -128,13 +128,16 @@ const ProfilePage = () => {
     const formData = new FormData();
     formData.append("avatar", image);
     try {
-      const response = await fetch("http://localhost:3001/users/me/image", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        "https://capstonebe-4u2r.onrender.com/users/me/image",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: formData,
+        }
+      );
       if (response.ok) {
         console.log("upload completed");
       }
