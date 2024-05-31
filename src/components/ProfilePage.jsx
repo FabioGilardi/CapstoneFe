@@ -394,7 +394,7 @@ const ProfilePage = () => {
                   }}
                 >
                   <option></option>
-                  <option value="T9:00:00.000">9.00</option>
+                  <option value="T09:00:00.000">9.00</option>
                   <option value="T10:00:00.000">10.00</option>
                   <option value="T11:00:00.000">11.00</option>
                   <option value="T12:00:00.000">12.00</option>
